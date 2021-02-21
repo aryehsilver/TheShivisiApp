@@ -1,0 +1,28 @@
+﻿<telerik:RadWindow x:Class="TheShivisiApp.MainWindow"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+									 xmlns:telerikNavigation="clr-namespace:Telerik.Windows.Controls.Navigation;assembly=Telerik.Windows.Controls.Navigation"
+									 DataContext="this"
+                   Header="The Shivisi App" Height="250" Width="265"
+									 ResizeMode="CanMinimize"
+									 Style="{StaticResource WindowStyle}"
+									 WindowStartupLocation="CenterScreen"
+									 telerikNavigation:RadWindowInteropHelper.ShowInTaskbar="True"
+									 telerik:StyleManager.Theme="Fluent" IsTopmost="True">
+	<!--<telerik:RadWindow.Icon>
+		<Image Source="ShivisiIcon.ico" Width="24" Margin="5" />
+	</telerik:RadWindow.Icon>-->
+	<!--<telerik:RadWindow.Background>
+		<ImageBrush ImageSource="ShivisiIcon.png" />
+	</telerik:RadWindow.Background>-->
+	<Grid>
+		<Button Click="Button_Click"
+						Padding="20"
+						Background="CadetBlue"
+						Content="Show notif"
+						VerticalAlignment="Center"
+						HorizontalAlignment="Center"
+						telerik:StyleManager.Theme="Fluent"/>
+	</Grid>
+</telerik:RadWindow>
