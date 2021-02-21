@@ -5,7 +5,7 @@
     <UseWPF>true</UseWPF>
     <RootNamespace>TheShivisiApp</RootNamespace>
     <EnableDefaultItems>False</EnableDefaultItems>
-    <ApplicationIcon>ISIcS</ApplicationIcon>
+    <ApplicationIcon>Data\SNI</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,7 +18,7 @@
     <Generator>MSBuild:Compile</Generator>
     <SubType>Designer</SubType>
   </ApplicationDefinition>
-  <Page Include="MainWindow.xaml">
+  <Page Include="Views\MainWindow.xaml">
     <Generator>MSBuild:Compile</Generator>
     <SubType>Designer</SubType>
   </Page>
@@ -29,8 +29,8 @@
     <DependentUpon>App.xaml</DependentUpon>
     <SubType>Code</SubType>
   </Compile>
-  <Compile Include="MainWindow.xaml.cs">
-    <DependentUpon>MainWindow.xaml</DependentUpon>
+  <Compile Include="Views\MainWindow.xaml.cs">
+    <DependentUpon>Views\MainWindow.xaml</DependentUpon>
     <SubType>Code</SubType>
   </Compile>
   <Compile Include="ViewModels\NotifyIconViewModel.cs" />
@@ -38,16 +38,16 @@
 </ItemGroup>
   
   <ItemGroup>
-    <Resource Include="SNI">
+    <Content Include="Data\ISIcS">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\ISBackDat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Data\SNI">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Content Include="ISIcS">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ISBackDat">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Resource Include="ISplashDat">
+    <Resource Include="Data\ISplashDat">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

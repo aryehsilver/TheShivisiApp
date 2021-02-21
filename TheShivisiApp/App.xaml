@@ -10,12 +10,12 @@
 			</ResourceDictionary.MergedDictionaries>
 			<Style x:Key="WindowStyle" TargetType="telerik:RadWindow">
 				<Setter Property="FontFamily" Value="Verdana" />
-				<Setter Property="Background">
+				<!--<Setter Property="Background">
 					<Setter.Value>
 						<VisualBrush>
 							<VisualBrush.Visual>
 								<Grid ClipToBounds="True">
-									<Image Source="ISBackDat">
+									<Image Source="Data\SNI">
 										<Image.Effect>
 											<BlurEffect Radius="20"/>
 										</Image.Effect>
@@ -24,7 +24,7 @@
 							</VisualBrush.Visual>
 						</VisualBrush>
 					</Setter.Value>
-				</Setter>
+				</Setter>-->
 			</Style>
 		</ResourceDictionary>
 	</Application.Resources>

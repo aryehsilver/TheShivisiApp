@@ -27,7 +27,7 @@ namespace TheShivisiApp {
     }
 
     private static void ShowSplashScreen() {
-      SplashScreen splash = new SplashScreen("ISplashDat");
+      SplashScreen splash = new SplashScreen("Data/ISplashDat");
       splash.Show(true, true);
       splash.Close(TimeSpan.FromSeconds(3));
     }
@@ -53,10 +53,10 @@ namespace TheShivisiApp {
       // Fill in the text elements
       XmlNodeList stringElements = toastXml.GetElementsByTagName("text");
       stringElements[0].AppendChild(toastXml.CreateTextNode("The Shivisi App"));
-      stringElements[1].AppendChild(toastXml.CreateTextNode("Remember!" + Environment.NewLine + "Your not the one in charge here!"));
+      stringElements[1].AppendChild(toastXml.CreateTextNode("Remember!" + Environment.NewLine + "You're not the one in charge here!"));
 
       // Specify the absolute path to an image
-      string imagePath = "file:///" + Path.GetFullPath("ISBackDat");
+      string imagePath = "file:///" + Path.GetFullPath("Data/ISBackDat");
       XmlNodeList imageElements = toastXml.GetElementsByTagName("image");
       imageElements[0].Attributes.GetNamedItem("src").NodeValue = imagePath;
 

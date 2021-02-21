@@ -5,7 +5,7 @@ using Telerik.Windows.Controls;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 
-namespace TheShivisiApp {
+namespace TheShivisiApp.Views {
   /// <summary>
   /// Interaction logic for MainWindow.xaml
   /// </summary>
@@ -26,7 +26,7 @@ namespace TheShivisiApp {
       stringElements[1].AppendChild(toastXml.CreateTextNode("Here is your notification to remind you that there is only one in charge here"));
 
       // Specify the absolute path to an image
-      string imagePath = "file:///" + Path.GetFullPath("ISBackDat");
+      string imagePath = "file:///" + Path.GetFullPath("Data/ISBackDat");
       XmlNodeList imageElements = toastXml.GetElementsByTagName("image");
       imageElements[0].Attributes.GetNamedItem("src").NodeValue = imagePath;
 
