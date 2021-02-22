@@ -29,6 +29,7 @@
     <DependentUpon>App.xaml</DependentUpon>
     <SubType>Code</SubType>
   </Compile>
+  <Compile Include="Helpers\GridHelper.cs" />
   <Compile Include="Views\MainWindow.xaml.cs">
     <DependentUpon>Views\MainWindow.xaml</DependentUpon>
     <SubType>Code</SubType>
