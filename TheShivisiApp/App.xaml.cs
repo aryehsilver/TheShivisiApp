@@ -4,6 +4,7 @@ using System.IO;
 using System.Timers;
 using System.Windows;
 using Telerik.Windows.Controls;
+using Telerik.Windows.Controls.MaterialControls;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 
@@ -21,6 +22,8 @@ namespace TheShivisiApp {
       notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
 
       StyleManager.ApplicationTheme = new FluentTheme();
+      FluentPalette.LoadPreset(FluentPalette.ColorVariation.Dark);
+      ThemeEffectsHelper.IsAcrylicEnabled = false;
       ShowSplashScreen();
       RunTimer();
       //PopTheToast();
