@@ -1,6 +1,8 @@
 # The Shivisi App ![Last commit to master](https://img.shields.io/github/last-commit/aryehsilver/TheShivisiApp/master)
 
-Computers ares the most incredible device. Yet they are also the most abused devices too. When your having a hard day and then you PC freezes or does things you never asked it to, we tend to put the blame on the computer. We will curse it whether out loud or in our minds. Sometimes even threatening it, other times almost smashing the screen etc.
+![aryehsilver](https://github.com/aryehsilver/TheShivisiApp/raw/master/TheShivisiApp/Data/ShivisiShinAppIcon.png "Shivisi App Icon")
+
+Computers are the most incredible devices. Yet they are also the most abused devices too. When your having a hard day and then you PC freezes or does things you never asked it to, we tend to put the blame on the computer. We will curse it whether out loud or in our minds. Sometimes even threatening it, other times almost smashing the screen etc.
 
 However when we have a good day i.e. nothing goes wrong, and the PC does what it is made to do, we never compliment it. We never say things like "Well done computer!" We just feel good about ourselves that we're getting stuff done.
 
