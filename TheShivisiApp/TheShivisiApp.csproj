@@ -6,10 +6,12 @@
     <RootNamespace>TheShivisiApp</RootNamespace>
     <EnableDefaultItems>False</EnableDefaultItems>
     <ApplicationIcon>Data\SNI</ApplicationIcon>
+    <AssemblyName>The Shivisi App</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.0.8" />
+    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="6.1.1" />
     <PackageReference Include="Telerik.UI.for.Wpf.NetCore.Xaml" Version="2021.1.119" />
   </ItemGroup>
   
@@ -18,11 +20,10 @@
     <Generator>MSBuild:Compile</Generator>
     <SubType>Designer</SubType>
   </ApplicationDefinition>
-  <Page Include="Views\MainWindow.xaml">
+  <Page Include="Data\NotifyIconResources.xaml">
     <Generator>MSBuild:Compile</Generator>
-    <SubType>Designer</SubType>
   </Page>
-  <Page Include="NotifyIconResources.xaml">
+  <Page Include="Views\Settings.xaml">
     <Generator>MSBuild:Compile</Generator>
   </Page>
   <Compile Include="App.xaml.cs">
@@ -30,13 +31,20 @@
     <SubType>Code</SubType>
   </Compile>
   <Compile Include="Helpers\GridHelper.cs" />
-  <Compile Include="Views\MainWindow.xaml.cs">
-    <DependentUpon>Views\MainWindow.xaml</DependentUpon>
-    <SubType>Code</SubType>
-  </Compile>
   <Compile Include="ViewModels\NotifyIconViewModel.cs" />
-  <Compile Include="ViewModels\MainWindowViewModel.cs" />
+  <Compile Include="Views\Settings.xaml.cs" />
 </ItemGroup>
+  
+  <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary.dll">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>0</VersionMinor>
+      <VersionMajor>1</VersionMajor>
+      <Guid>f935dc20-1cf0-11d0-adb9-00c04fd58a0b</Guid>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+    </COMReference>
+  </ItemGroup>
   
   <ItemGroup>
     <Content Include="Data\ISIcS">
