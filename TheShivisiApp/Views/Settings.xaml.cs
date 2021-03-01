@@ -37,7 +37,15 @@ namespace TheShivisiApp.Views {
       SplashScreen = splashScreen.IsChecked ?? true;
       Interval = (double)interval.Value;
       NotifText = notifText.CurrentText;
-      Save();
+
+      if (interval.Value <= 0) {
+        Alert(new DialogParameters {
+          Header = "Error",
+          Content = "The interval value must be greater than 0"
+        });
+      } else {
+        Save();
+      }
     }
 
     public async Task Save() {

@@ -77,6 +77,14 @@ namespace TheShivisiApp {
         }
 
         LastRead = DateTime.Now;
+
+        if (Interval <= 0) {
+          RadWindow.Alert(new DialogParameters {
+            Header = "Error",
+            Content = "The interval value must be greater than 0" + Environment.NewLine + "1 minute intervals will be used instead"
+          });
+          Interval = 1;
+        }
         success = true;
       } catch (Exception ex) {
         success = false;
@@ -109,6 +117,10 @@ namespace TheShivisiApp {
     }
 
     private void Timer_Elapsed(object sender, ElapsedEventArgs e) {
+      // ISSUE: This will only get hit the next time the timer finishes it's elapsed time.
+      // What if the user has chosen a smaller interval, say from 30 min down to 5,
+      // how will the app know to change it until another 30 min passes and we hit the elapsed?
+      // Settings need to raise an event which will be picked up here...
       CheckTimeStamps();
       PopTheToast();
     }
