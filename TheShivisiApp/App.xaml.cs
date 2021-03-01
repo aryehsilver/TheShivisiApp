@@ -133,6 +133,10 @@ namespace TheShivisiApp {
 
         System.Xml.XmlNode intervalNode = readFile.SelectSingleNode("/Settings/Interval");
         timer.Interval = (double.TryParse(intervalNode.InnerText, out double outInterval) ? outInterval : 30) * 60000;
+
+        System.Xml.XmlNode notifTextNode = readFile.SelectSingleNode("/Settings/NotifText");
+        NotifText = notifTextNode.InnerText;
+
         LastRead = DateTime.Now;
       }
     }
