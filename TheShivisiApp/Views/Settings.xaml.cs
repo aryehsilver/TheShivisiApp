@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using Telerik.Windows.Controls;
@@ -60,7 +61,7 @@ namespace TheShivisiApp.Views {
           if (RunsOnStartup) {
             IWshRuntimeLibrary.WshShell wsh = new IWshRuntimeLibrary.WshShell();
             IWshRuntimeLibrary.IWshShortcut shortcut = wsh.CreateShortcut(Startup_Folder + "\\The Shivisi App.lnk") as IWshRuntimeLibrary.IWshShortcut;
-            shortcut.TargetPath = "C:\\Program Files (x86)\\The Shivisi App\\The Shivisi App.exe";
+            shortcut.TargetPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase), "The Shivisi App.exe");
             shortcut.Description = "Shortcut to 'The Shivisi App'";
             shortcut.Save();
           } else {
