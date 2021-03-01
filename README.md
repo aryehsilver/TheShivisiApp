@@ -8,7 +8,7 @@ However when we have a good day i.e. nothing goes wrong, and the PC does what it
 
 We somehow feel emotionally connected to our technological devices. It's a very strange thing.
 
-Whilst I'm not going to give you any understanding on why we feel this way (I'll leave that to the psychologists to reason about).
+I'm not going to give you any understanding on why we feel this way - I'll leave that to the psychologists to reason about.
 
 
 What we do usually forget though, is that there is One Above who is controlling our every move. He is the one who decides if the device should stop responding or do what we requested of it. When something doesn't go well, it is due to Him testing us. When things go well too, it is He who has decided that we should have that enjoyment.
