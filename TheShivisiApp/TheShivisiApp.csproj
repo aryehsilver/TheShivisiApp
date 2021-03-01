@@ -47,9 +47,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Content Include="Data\ISIcS">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Data\ISBackDat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
