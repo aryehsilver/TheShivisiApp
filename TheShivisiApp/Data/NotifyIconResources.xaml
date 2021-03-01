@@ -9,7 +9,7 @@
         reuse the same context menu (which is a resource) again (which will have its DataContext set to the old TaskbarIcon) -->
 	<ContextMenu x:Shared="false" x:Key="SysTrayMenu">
 		<MenuItem Header="Open Settings" Command="{Binding ShowWindowCommand}" />
-		<MenuItem Header="Close Settings" Command="{Binding HideWindowCommand}" />
+		<!--<MenuItem Header="Close Settings" Command="{Binding HideWindowCommand}" />-->
 		<Separator />
 		<MenuItem Header="Exit" Command="{Binding ExitApplicationCommand}" />
 	</ContextMenu>
