@@ -6,7 +6,7 @@
 	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="NotifyIconResources.xaml" />
+				<ResourceDictionary Source="Data/NotifyIconResources.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 			<Style x:Key="WindowStyle" TargetType="telerik:RadWindow">
 				<Setter Property="FontFamily" Value="Verdana" />
