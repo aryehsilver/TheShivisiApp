@@ -13,8 +13,18 @@ namespace TheShivisiApp {
   /// Interaction logic for App.xaml
   /// </summary>
   public partial class App : Application {
+    #region Props, Fields & consts
     private const string APP_ID = "The Shivisi App";
+    private static readonly string App_Folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\The Shivisi App";
+    private static readonly string Startup_Folder = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
     private TaskbarIcon notifyIcon;
+    private Timer timer;
+    public DateTime LastRead { get; set; }
+    public bool RunsOnStartup { get; set; } = true;
+    public bool SplashScreen { get; set; } = true;
+    public double Interval { get; set; } = 30;
+    public string NotifText { get; set; } = "Remember!" + Environment.NewLine + "You're not the one in charge here!";
+    #endregion
 
     protected override void OnStartup(StartupEventArgs e) {
       base.OnStartup(e);
@@ -24,54 +34,111 @@ namespace TheShivisiApp {
       StyleManager.ApplicationTheme = new FluentTheme();
       FluentPalette.LoadPreset(FluentPalette.ColorVariation.Dark);
       ThemeEffectsHelper.IsAcrylicEnabled = false;
-      ShowSplashScreen();
-      RunTimer();
-      //PopTheToast();
+
+      Start();
     }
 
-    private static void ShowSplashScreen() {
-      SplashScreen splash = new SplashScreen("Data/ISplashDat");
-      splash.Show(true, true);
-      splash.Close(TimeSpan.FromSeconds(3));
+    public void Start() {
+      if (!Directory.Exists(App_Folder)) {
+        Directory.CreateDirectory(App_Folder);
+      }
+
+      ReadFromXml();
+
+      ShowSplashScreen();
+      RunTimer();
+    }
+
+    private void ReadFromXml() {
+      bool success;
+      Exception exception = new Exception();
+
+      try {
+        if (File.Exists(Path.Combine(App_Folder, "Settings.xml"))) {
+          System.Xml.XmlDocument readFile = new System.Xml.XmlDocument();
+          readFile.Load(Path.Combine(App_Folder, "Settings.xml"));
+
+          System.Xml.XmlNode startupNode = readFile.SelectSingleNode("/Settings/Startup");
+          RunsOnStartup = startupNode.InnerText == "True";
+
+          System.Xml.XmlNode splashScreenNode = readFile.SelectSingleNode("/Settings/SplashScreen");
+          SplashScreen = splashScreenNode.InnerText == "True";
+
+          System.Xml.XmlNode intervalNode = readFile.SelectSingleNode("/Settings/Interval");
+          Interval = double.TryParse(intervalNode.InnerText, out double outInterval) ? outInterval : 30;
+
+          System.Xml.XmlNode notifTextNode = readFile.SelectSingleNode("/Settings/NotifText");
+          NotifText = notifTextNode.InnerText;
+        } else {
+          RunsOnStartup = true;
+          SplashScreen = true;
+          Interval = 30;
+          NotifText = "Remember!" + Environment.NewLine + "You're not the one in charge here!";
+        }
+
+        LastRead = DateTime.Now;
+        success = true;
+      } catch (Exception ex) {
+        success = false;
+        exception = ex;
+      }
+
+      if (!success) {
+        RadWindow.Alert(new DialogParameters {
+          Header = "The Shivisi App - Error",
+          Content = "Error reading the settings" + Environment.NewLine + exception.Message
+        });
+      }
+    }
+
+    private void ShowSplashScreen() {
+      if (SplashScreen) {
+        SplashScreen splash = new SplashScreen("Data/ISplashDat");
+        splash.Show(true, true);
+        splash.Close(TimeSpan.FromSeconds(3));
+      }
     }
 
     private void RunTimer() {
-      Timer timer = new Timer {
+      timer = new Timer {
         // [1 min = 60,000 | 5 min = 300,000 | 30 min = 1,800,000 | 1 hr = 3,600,000]
-        Interval = 1800000
+        Interval = Interval * 60000
       };
       timer.Start();
       timer.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
     }
 
     private void Timer_Elapsed(object sender, ElapsedEventArgs e) {
+      CheckTimeStamps();
       PopTheToast();
-      //MessageBox.Show("The timer interval has been reached.", "Timer", MessageBoxButton.OK, MessageBoxImage.Information);
     }
 
-    private static void PopTheToast() {
-      // Get a toast XML template
-      XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText03);
+    private void CheckTimeStamps() {
+      DateTime time = File.GetLastWriteTime(Path.Combine(App_Folder, "Settings.xml"));
+      if (LastRead < time) {
+        System.Xml.XmlDocument readFile = new System.Xml.XmlDocument();
+        readFile.Load(Path.Combine(App_Folder, "Settings.xml"));
 
-      // Fill in the text elements
+        System.Xml.XmlNode intervalNode = readFile.SelectSingleNode("/Settings/Interval");
+        timer.Interval = (double.TryParse(intervalNode.InnerText, out double outInterval) ? outInterval : 30) * 60000;
+        LastRead = DateTime.Now;
+      }
+    }
+
+    public void PopTheToast() {
+      XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText03);
       XmlNodeList stringElements = toastXml.GetElementsByTagName("text");
       stringElements[0].AppendChild(toastXml.CreateTextNode("The Shivisi App"));
-      stringElements[1].AppendChild(toastXml.CreateTextNode("Remember!" + Environment.NewLine + "You're not the one in charge here!"));
-
-      // Specify the absolute path to an image
+      stringElements[1].AppendChild(toastXml.CreateTextNode(!string.IsNullOrWhiteSpace(NotifText) ? NotifText : "Remember!" + Environment.NewLine + "You're not the one in charge here!"));
       string imagePath = "file:///" + Path.GetFullPath("Data/ISBackDat");
       XmlNodeList imageElements = toastXml.GetElementsByTagName("image");
       imageElements[0].Attributes.GetNamedItem("src").NodeValue = imagePath;
-
-      // Create the toast and attach event listeners
       ToastNotification toast = new ToastNotification(toastXml);
-
-      // Show the toast. Be sure to specify the AppUserModelId on your application's shortcut!
       ToastNotificationManager.CreateToastNotifier(APP_ID).Show(toast);
     }
 
     protected override void OnExit(ExitEventArgs e) {
-      notifyIcon.Dispose(); //the icon would clean up automatically, but this is cleaner
+      notifyIcon.Dispose(); // the icon would clean up automatically, but this is cleaner
       base.OnExit(e);
     }
   }
