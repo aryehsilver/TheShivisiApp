@@ -86,12 +86,13 @@ namespace TheShivisiApp.Views {
     }
 
     private void SaveToXml() {
-      string data = $@"<Settings>
-                         <Startup>{RunsOnStartup}</Startup>
-                         <SplashScreen>{SplashScreen}</SplashScreen>
-                         <Interval>{Interval}</Interval>
-                         <NotifText>{NotifText}</NotifText>
-                       </Settings>";
+      string data = $@"<?xml version='1.0' encoding='utf-8'?>
+                         <Settings>
+                           <Startup>{RunsOnStartup}</Startup>
+                           <SplashScreen>{SplashScreen}</SplashScreen>
+                           <Interval>{Interval}</Interval>
+                           <NotifText>{NotifText}</NotifText>
+                         </Settings>";
 
       System.Xml.XmlDocument toSave = new System.Xml.XmlDocument();
       toSave.LoadXml(data);
