@@ -1,6 +1,6 @@
 # The Shivisi App ![Last commit to master](https://img.shields.io/github/last-commit/aryehsilver/TheShivisiApp/master)
 
-![aryehsilver](/Data/ShivisiShinAppIcon.png "Shivisi App Icon")
+![aryehsilver](/TheShivisiApp/Data/ShivisiShinAppIcon.png "Shivisi App Icon")
 
 Computers are the most incredible devices. Yet they are also the most abused devices too. When your having a hard day and then you PC freezes or does things you never asked it to, we tend to put the blame on the computer. We will curse it whether out loud or in our minds. Sometimes even threatening it, other times almost smashing the screen etc.
 
