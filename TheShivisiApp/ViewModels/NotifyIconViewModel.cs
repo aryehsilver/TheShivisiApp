@@ -16,12 +16,10 @@ namespace TheShivisiApp.ViewModels {
     public ICommand ShowWindowCommand => new DelegateCommand {
       CanExecuteFunc = () => Application.Current.MainWindow == null,
       CommandAction = () => {
-        MainWindow mw = new MainWindow();
-        mw.Show();
-        //Application.Current.MainWindow.Show();
-        //Application.Current.MainWindow = new MainWindow();
-        //Settings.MainWindow mainWindow = new Settings.MainWindow();
-        //mainWindow.Show();
+        Settings settings = new Settings();
+        if (settings.Success) {
+          settings.Show();
+        }
       }
     };
 
@@ -32,7 +30,6 @@ namespace TheShivisiApp.ViewModels {
       CommandAction = () => Application.Current.MainWindow.Close(),
       CanExecuteFunc = () => Application.Current.MainWindow != null
     };
-
 
     /// <summary>
     /// Shuts down the application.
