@@ -101,7 +101,7 @@ namespace TheShivisiApp {
 
     private void ShowSplashScreen() {
       if (SplashScreen) {
-        SplashScreen splash = new SplashScreen("Data/ISplashDat");
+        SplashScreen splash = new SplashScreen("Data/ShivisiSplashScreen.png");
         splash.Show(true, true);
         splash.Close(TimeSpan.FromSeconds(3));
       }
@@ -142,7 +142,7 @@ namespace TheShivisiApp {
       XmlNodeList stringElements = toastXml.GetElementsByTagName("text");
       stringElements[0].AppendChild(toastXml.CreateTextNode("The Shivisi App"));
       stringElements[1].AppendChild(toastXml.CreateTextNode(!string.IsNullOrWhiteSpace(NotifText) ? NotifText : "Remember!" + Environment.NewLine + "You're not the one in charge here!"));
-      string imagePath = "file:///" + Path.GetFullPath("Data/ISBackDat");
+      string imagePath = "file:///" + Path.GetFullPath("Data/ShivisiIcon.png");
       XmlNodeList imageElements = toastXml.GetElementsByTagName("image");
       imageElements[0].Attributes.GetNamedItem("src").NodeValue = imagePath;
       ToastNotification toast = new ToastNotification(toastXml);

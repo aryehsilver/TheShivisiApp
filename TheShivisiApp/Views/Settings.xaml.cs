@@ -157,7 +157,7 @@ namespace TheShivisiApp.Views {
       XmlNodeList stringElements = toastXml.GetElementsByTagName("text");
       stringElements[0].AppendChild(toastXml.CreateTextNode("The Shivisi App"));
       stringElements[1].AppendChild(toastXml.CreateTextNode(!string.IsNullOrWhiteSpace(notifText.CurrentText) ? notifText.CurrentText : "Remember!" + Environment.NewLine + "You're not the one in charge here!"));
-      string imagePath = "file:///" + Path.GetFullPath("Data/ISBackDat");
+      string imagePath = "file:///" + Path.GetFullPath("Data/ShivisiIcon.png");
       XmlNodeList imageElements = toastXml.GetElementsByTagName("image");
       imageElements[0].Attributes.GetNamedItem("src").NodeValue = imagePath;
       ToastNotification toast = new ToastNotification(toastXml);
