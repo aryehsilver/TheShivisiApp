@@ -50,6 +50,9 @@
     <Content Include="Data\ShivisiIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Data\ShivisiShinAppIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Data\SNI">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
