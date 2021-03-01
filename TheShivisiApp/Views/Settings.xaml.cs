@@ -17,7 +17,7 @@ namespace TheShivisiApp.Views {
     private static readonly string Startup_Folder = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
     public bool RunsOnStartup { get; set; } = true;
     public bool SplashScreen { get; set; } = true;
-    public int Interval { get; set; } = 30;
+    public double Interval { get; set; } = 30;
     public string NotifText { get; set; } = "Remember!" + Environment.NewLine + "You're not the one in charge here!";
     public bool Success { get; set; } = false;
     #endregion
@@ -35,7 +35,7 @@ namespace TheShivisiApp.Views {
     private void Save_Click(object sender, RoutedEventArgs e) {
       RunsOnStartup = startup.IsChecked ?? true;
       SplashScreen = splashScreen.IsChecked ?? true;
-      Interval = (int)interval.Value;
+      Interval = (double)interval.Value;
       NotifText = notifText.CurrentText;
       Save();
     }
@@ -106,7 +106,7 @@ namespace TheShivisiApp.Views {
           splashScreen.IsChecked = splashScreenNode.InnerText == "True";
 
           System.Xml.XmlNode intervalNode = readFile.SelectSingleNode("/Settings/Interval");
-          interval.Value = int.TryParse(intervalNode.InnerText, out int outInterval) ? outInterval : 30;
+          interval.Value = double.TryParse(intervalNode.InnerText, out double outInterval) ? outInterval : 30;
 
           System.Xml.XmlNode notifTextNode = readFile.SelectSingleNode("/Settings/NotifText");
           notifText.CurrentText = notifTextNode.InnerText;
