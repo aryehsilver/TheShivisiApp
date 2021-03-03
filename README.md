@@ -23,4 +23,4 @@ Pull request are welcome. Any contribution to help develop this app further is g
 
 I hope you find yourself having a better user experience when you're reminded who is really running the show…
 
-![aryehsilver](https://aryehsilver.co.uk/my-content/DownloadShivisiAppButton.png Download The Shivisi App Button)
+![aryehsilver](https://aryehsilver.co.uk/my-content/DownloadShivisiAppButton.png "Download The Shivisi App Button")
