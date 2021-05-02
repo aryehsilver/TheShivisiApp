@@ -24,3 +24,7 @@ Pull request are welcome. Any contribution to help develop this app further is g
 I hope you find yourself having a better user experience when you're reminded who is really running the show…
 
 [![aryehsilver](https://aryehsilver.co.uk/my-content/DownloadShivisiAppButton.png "Download The Shivisi App")](https://aryehsilver.co.uk/my-content/The%20Shivisi%20App%20Setup%20File.zip)
+
+## For future releases
+
+* Clean up the notification after popping to keep the action center clean.
