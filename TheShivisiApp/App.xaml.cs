@@ -1,4 +1,5 @@
 ﻿using Hardcodet.Wpf.TaskbarNotification;
+using Microsoft.Toolkit.Uwp.Notifications;
 using System;
 using System.IO;
 using System.Timers;
@@ -141,17 +142,14 @@ namespace TheShivisiApp {
       }
     }
 
-    public void PopTheToast() {
-      XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText03);
-      XmlNodeList stringElements = toastXml.GetElementsByTagName("text");
-      stringElements[0].AppendChild(toastXml.CreateTextNode("The Shivisi App"));
-      stringElements[1].AppendChild(toastXml.CreateTextNode(!string.IsNullOrWhiteSpace(NotifText) ? NotifText : "Remember!" + Environment.NewLine + "You're not the one in charge here!"));
-      string imagePath = "file:///" + Path.GetFullPath("Data/ShivisiShinAppIcon.png");
-      XmlNodeList imageElements = toastXml.GetElementsByTagName("image");
-      imageElements[0].Attributes.GetNamedItem("src").NodeValue = imagePath;
-      ToastNotification toast = new ToastNotification(toastXml);
-      ToastNotificationManager.CreateToastNotifier(APP_ID).Show(toast);
-    }
+    public void PopTheToast() =>
+      new ToastContentBuilder()
+          .AddText("The Shivisi App")
+          .AddText(!string.IsNullOrWhiteSpace(NotifText) ? NotifText : "Remember!" + Environment.NewLine + "You're not the one in charge here!")
+          //.AddHeroImage(new Uri("file:///"))
+          .AddAppLogoOverride(new Uri("file:///" + Path.GetFullPath("Data/ShivisiShinAppIcon.png")), ToastGenericAppLogoCrop.Circle)
+          .AddAttributionText("Via TSA")
+          .Show(toast => toast.ExpirationTime = DateTime.Now.AddMinutes(1));
 
     protected override void OnExit(ExitEventArgs e) {
       notifyIcon.Dispose(); // the icon would clean up automatically, but this is cleaner
