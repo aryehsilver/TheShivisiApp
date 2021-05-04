@@ -1,6 +1,6 @@
 # The Shivisi App ![Last commit to master](https://img.shields.io/github/last-commit/aryehsilver/TheShivisiApp/master)
 
-![aryehsilver](/TheShivisiApp/Data/ShivisiShinAppIcon.png "Shivisi App Icon")
+![aryehsilver](/TheShivisiApp/Data/ShivisiShinAppIcon.png "The Shivisi App Icon")
 
 Computers are the most incredible devices. Yet they are also the most abused devices too. When your having a hard day and then your PC freezes or does things you never asked it to, we tend to put the blame on the computer. We will curse it whether out loud or in our minds. Sometimes even threatening it, other times almost smashing the screen etc.
 
@@ -22,3 +22,9 @@ To download the setup file for the published version, [click here](https://aryeh
 Pull request are welcome. Any contribution to help develop this app further is greatly appreciated.
 
 I hope you find yourself having a better user experience when you're reminded who is really running the show…
+
+[![aryehsilver](https://aryehsilver.co.uk/my-content/DownloadShivisiAppButton.png "Download The Shivisi App")](https://aryehsilver.co.uk/my-content/The%20Shivisi%20App%20Setup%20File.zip)
+
+## For future releases
+
+* Clean up the notification after popping to keep the action center clean.
