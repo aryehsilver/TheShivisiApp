@@ -152,6 +152,7 @@ namespace TheShivisiApp.Views {
     }
 
     private void Test_Click(object sender, RoutedEventArgs e) {
+      NotifText = notifText.CurrentText;
       PopTheToast();
     }
 
