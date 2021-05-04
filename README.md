@@ -27,4 +27,4 @@ I hope you find yourself having a better user experience when you're reminded wh
 
 ## For future releases
 
-* Clean up the notification after popping to keep the action center clean.
+*
