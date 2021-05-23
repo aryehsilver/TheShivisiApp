@@ -1,13 +1,11 @@
-﻿using Hardcodet.Wpf.TaskbarNotification;
-using Microsoft.Toolkit.Uwp.Notifications;
+﻿using NotifyIcon;
 using System;
 using System.IO;
 using System.Timers;
 using System.Windows;
 using Telerik.Windows.Controls;
 using Telerik.Windows.Controls.MaterialControls;
-using Windows.Data.Xml.Dom;
-using Windows.UI.Notifications;
+using TheShivisiApp.Helpers;
 
 namespace TheShivisiApp {
   /// <summary>
@@ -15,9 +13,7 @@ namespace TheShivisiApp {
   /// </summary>
   public partial class App : Application {
     #region Props, Fields & consts
-    private const string APP_ID = "The Shivisi App";
     private static readonly string App_Folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\The Shivisi App";
-    private static readonly string Startup_Folder = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
     private TaskbarIcon notifyIcon;
     private Timer timer;
     public DateTime LastRead { get; set; }
@@ -52,11 +48,11 @@ namespace TheShivisiApp {
 
     private void ReadFromXml() {
       bool success;
-      Exception exception = new Exception();
+      Exception exception = new();
 
       try {
         if (File.Exists(Path.Combine(App_Folder, "Settings.xml"))) {
-          System.Xml.XmlDocument readFile = new System.Xml.XmlDocument();
+          System.Xml.XmlDocument readFile = new();
           readFile.Load(Path.Combine(App_Folder, "Settings.xml"));
 
           System.Xml.XmlNode startupNode = readFile.SelectSingleNode("/Settings/Startup");
@@ -102,7 +98,7 @@ namespace TheShivisiApp {
 
     private void ShowSplashScreen() {
       if (SplashScreen) {
-        SplashScreen splash = new SplashScreen("Data/ShivisiSplashScreen.png");
+        SplashScreen splash = new("Data/ShivisiSplashScreen.png");
         splash.Show(true, true);
         splash.Close(TimeSpan.FromSeconds(3));
       }
@@ -123,13 +119,13 @@ namespace TheShivisiApp {
       // how will the app know to change it until another 30 min passes and we hit the elapsed?
       // Settings need to raise an event which will be picked up here...
       CheckTimeStamps();
-      PopTheToast();
+      PopTheToast.PopIt(NotifText);
     }
 
     private void CheckTimeStamps() {
       DateTime time = File.GetLastWriteTime(Path.Combine(App_Folder, "Settings.xml"));
       if (LastRead < time) {
-        System.Xml.XmlDocument readFile = new System.Xml.XmlDocument();
+        System.Xml.XmlDocument readFile = new();
         readFile.Load(Path.Combine(App_Folder, "Settings.xml"));
 
         System.Xml.XmlNode intervalNode = readFile.SelectSingleNode("/Settings/Interval");
@@ -141,15 +137,6 @@ namespace TheShivisiApp {
         LastRead = DateTime.Now;
       }
     }
-
-    public void PopTheToast() =>
-      new ToastContentBuilder()
-          .AddText("The Shivisi App")
-          .AddText(!string.IsNullOrWhiteSpace(NotifText) ? NotifText : "Remember!" + Environment.NewLine + "You're not the one in charge here!")
-          //.AddHeroImage(new Uri("file:///"))
-          .AddAppLogoOverride(new Uri("file:///" + Path.GetFullPath("Data/ShivisiShinAppIcon.png")), ToastGenericAppLogoCrop.Circle)
-          .AddAttributionText("Via TSA")
-          .Show(toast => toast.ExpirationTime = DateTime.Now.AddMinutes(1));
 
     protected override void OnExit(ExitEventArgs e) {
       notifyIcon.Dispose(); // the icon would clean up automatically, but this is cleaner

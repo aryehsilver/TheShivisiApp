@@ -1,74 +1,68 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UseWPF>true</UseWPF>
-    <RootNamespace>TheShivisiApp</RootNamespace>
-    <EnableDefaultItems>False</EnableDefaultItems>
-    <ApplicationIcon>Data\SNI</ApplicationIcon>
-    <AssemblyName>The Shivisi App</AssemblyName>
-    <AssemblyVersion>1.6.0.0</AssemblyVersion>
-    <FileVersion>1.6.0.0</FileVersion>
-    <Version>1.6.0</Version>
-  </PropertyGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net5.0-windows10.0.17763.0</TargetFramework>
+		<UseWPF>true</UseWPF>
+		<RootNamespace>TheShivisiApp</RootNamespace>
+		<EnableDefaultItems>False</EnableDefaultItems>
+		<ApplicationIcon>Data\SNI</ApplicationIcon>
+		<AssemblyName>The Shivisi App</AssemblyName>
+		<AssemblyVersion>2.0.0.0</AssemblyVersion>
+		<FileVersion>2.0.0.0</FileVersion>
+		<Version>2.0</Version>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.0.8" />
-    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.0.1" />
-    <PackageReference Include="Telerik.UI.for.Wpf.NetCore.Xaml" Version="2021.1.119" />
-  </ItemGroup>
-  
-  <ItemGroup>
-  <ApplicationDefinition Include="App.xaml">
-    <Generator>MSBuild:Compile</Generator>
-    <SubType>Designer</SubType>
-  </ApplicationDefinition>
-  <Page Include="Data\NotifyIconResources.xaml">
-    <Generator>MSBuild:Compile</Generator>
-  </Page>
-  <Page Include="Views\Settings.xaml">
-    <Generator>MSBuild:Compile</Generator>
-  </Page>
-  <Compile Include="App.xaml.cs">
-    <DependentUpon>App.xaml</DependentUpon>
-    <SubType>Code</SubType>
-  </Compile>
-  <Compile Include="Helpers\GridHelper.cs" />
-  <Compile Include="ViewModels\NotifyIconViewModel.cs" />
-  <Compile Include="Views\Settings.xaml.cs" />
-</ItemGroup>
-  
-  <ItemGroup>
-    <COMReference Include="IWshRuntimeLibrary.dll">
-      <WrapperTool>tlbimp</WrapperTool>
-      <VersionMinor>0</VersionMinor>
-      <VersionMajor>1</VersionMajor>
-      <Guid>f935dc20-1cf0-11d0-adb9-00c04fd58a0b</Guid>
-      <Lcid>0</Lcid>
-      <Isolated>false</Isolated>
-    </COMReference>
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Content Include="Data\ShivisiIcon.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\ShivisiShinAppIcon.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Resource Include="Data\SNI">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Data\ShivisiSplashScreen.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Reference Include="Windows">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral\Annotated\Windows.winmd</HintPath>
-      <IsWinMDFile>true</IsWinMDFile>
-    </Reference>
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.0.1" />
+		<PackageReference Include="Telerik.UI.for.Wpf.NetCore.Xaml" Version="2021.2.511" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ApplicationDefinition Include="App.xaml">
+			<Generator>MSBuild:Compile</Generator>
+			<SubType>Designer</SubType>
+		</ApplicationDefinition>
+		<Page Include="Data\NotifyIconResources.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</Page>
+		<Page Include="Views\Settings.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</Page>
+		<Compile Include="App.xaml.cs">
+			<DependentUpon>App.xaml</DependentUpon>
+			<SubType>Code</SubType>
+		</Compile>
+		<Compile Include="Helpers\GridHelper.cs" />
+		<Compile Include="Helpers\PopTheToast.cs" />
+		<Compile Include="ViewModels\NotifyIconViewModel.cs" />
+		<Compile Include="Views\Settings.xaml.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<COMReference Include="IWshRuntimeLibrary.dll">
+			<WrapperTool>tlbimp</WrapperTool>
+			<VersionMinor>0</VersionMinor>
+			<VersionMajor>1</VersionMajor>
+			<Guid>f935dc20-1cf0-11d0-adb9-00c04fd58a0b</Guid>
+			<Lcid>0</Lcid>
+			<Isolated>false</Isolated>
+		</COMReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="Data\ShivisiIcon.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Data\ShivisiShinAppIcon.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<ProjectReference Include="..\NotifyIcon\NotifyIcon.csproj" />
+		<Resource Include="Data\SNI">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Data\ShivisiSplashScreen.png">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+	</ItemGroup>
 
 </Project>

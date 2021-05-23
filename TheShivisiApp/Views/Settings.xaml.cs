@@ -1,12 +1,10 @@
-﻿using Microsoft.Toolkit.Uwp.Notifications;
-using System;
+﻿using System;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using Telerik.Windows.Controls;
-using Windows.Data.Xml.Dom;
-using Windows.UI.Notifications;
+using TheShivisiApp.Helpers;
 
 namespace TheShivisiApp.Views {
   /// <summary>
@@ -14,7 +12,6 @@ namespace TheShivisiApp.Views {
   /// </summary>
   public partial class Settings : RadWindow {
     #region Props, Fields & Consts
-    private const string APP_ID = "The Shivisi App";
     private static readonly string App_Folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\The Shivisi App";
     private static readonly string Startup_Folder = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
     public bool RunsOnStartup { get; set; } = true;
@@ -46,23 +43,23 @@ namespace TheShivisiApp.Views {
           Content = "The interval value must be greater than 0"
         });
       } else {
-        Save();
+        _ = Save();
       }
     }
 
     public async Task Save() {
       busyIndicator.IsBusy = true;
       bool success = false;
-      Exception exception = new Exception();
+      Exception exception = new();
 
       await Task.Run(() => {
         try {
           SaveToXml();
           // Set startup config
           if (RunsOnStartup) {
-            IWshRuntimeLibrary.WshShell wsh = new IWshRuntimeLibrary.WshShell();
+            IWshRuntimeLibrary.WshShell wsh = new();
             IWshRuntimeLibrary.IWshShortcut shortcut = wsh.CreateShortcut(Startup_Folder + "\\The Shivisi App.lnk") as IWshRuntimeLibrary.IWshShortcut;
-            shortcut.TargetPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase), "The Shivisi App.exe");
+            shortcut.TargetPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "The Shivisi App.exe");
             shortcut.Description = "Shortcut to 'The Shivisi App'";
             shortcut.Save();
           } else {
@@ -96,18 +93,18 @@ namespace TheShivisiApp.Views {
                            <NotifText>{NotifText}</NotifText>
                          </Settings>";
 
-      System.Xml.XmlDocument toSave = new System.Xml.XmlDocument();
+      System.Xml.XmlDocument toSave = new();
       toSave.LoadXml(data);
       toSave.Save(Path.Combine(App_Folder, "Settings.xml"));
     }
 
     private bool ReadFromXml() {
       bool success;
-      Exception exception = new Exception();
+      Exception exception = new();
 
       try {
         if (File.Exists(Path.Combine(App_Folder, "Settings.xml"))) {
-          System.Xml.XmlDocument readFile = new System.Xml.XmlDocument();
+          System.Xml.XmlDocument readFile = new();
           readFile.Load(Path.Combine(App_Folder, "Settings.xml"));
 
           System.Xml.XmlNode startupNode = readFile.SelectSingleNode("/Settings/Startup");
@@ -147,22 +144,11 @@ namespace TheShivisiApp.Views {
       return true;
     }
 
-    private void Cancel_Click(object sender, RoutedEventArgs e) {
-      Close();
-    }
+    private void Cancel_Click(object sender, RoutedEventArgs e) => Close();
 
     private void Test_Click(object sender, RoutedEventArgs e) {
       NotifText = notifText.CurrentText;
-      PopTheToast();
+      PopTheToast.PopIt(NotifText);
     }
-
-    public void PopTheToast() =>
-      new ToastContentBuilder()
-          .AddText("The Shivisi App")
-          .AddText(!string.IsNullOrWhiteSpace(NotifText) ? NotifText : "Remember!" + Environment.NewLine + "You're not the one in charge here!")
-          //.AddHeroImage(new Uri("file:///"))
-          .AddAppLogoOverride(new Uri("file:///" + Path.GetFullPath("Data/ShivisiShinAppIcon.png")), ToastGenericAppLogoCrop.Circle)
-          .AddAttributionText("Via TSA")
-          .Show(toast => toast.ExpirationTime = DateTime.Now.AddMinutes(1));
   }
 }
