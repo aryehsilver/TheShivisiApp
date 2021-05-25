@@ -50,6 +50,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Content Include="Data\ShivisiAppNewLogo.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
 		<Content Include="Data\ShivisiIcon.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
