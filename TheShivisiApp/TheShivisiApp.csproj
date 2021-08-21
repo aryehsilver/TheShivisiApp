@@ -13,8 +13,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.0.1" />
-		<PackageReference Include="Telerik.UI.for.Wpf.NetCore.Xaml" Version="2021.2.511" />
+		<PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.0.2" />
+		<PackageReference Include="Telerik.UI.for.Wpf.NetCore.Xaml" Version="2021.2.615" />
 	</ItemGroup>
 
 	<ItemGroup>
