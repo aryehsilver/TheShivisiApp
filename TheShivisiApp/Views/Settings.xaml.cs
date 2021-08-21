@@ -144,7 +144,8 @@ namespace TheShivisiApp.Views {
       return true;
     }
 
-    private void Cancel_Click(object sender, RoutedEventArgs e) => Close();
+    private void Cancel_Click(object sender, RoutedEventArgs e) =>
+      Close();
 
     private void Test_Click(object sender, RoutedEventArgs e) {
       NotifText = notifText.CurrentText;
