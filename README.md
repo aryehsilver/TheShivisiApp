@@ -17,13 +17,11 @@ The problem is, when we're in the midst of doing something, we get so caught up 
 
 For this reason I have created 'The Shivisi App' designed to do just that. The program starts on system start-up, and runs quietly in the background. Every 30 minutes it pops up a toast notification to let the user know Who is in charge. An icon is added to the tray notifications area. By clicking on the icon or by right clicking and selecting 'open settings' you can customise things like whether there should be a splash screen on startup, how long the intervals are, whether to start on system start-up and what text to show on the notification.
 
-To download the setup file for the published version, [click here](https://aryehsilver.co.uk/my-content/The%20Shivisi%20App%20Setup%20File.zip) and unzip. Your setup file is waiting inside.
+The setup file can now be downloaded via the [releases page](https://github.com/aryehsilver/TheShivisiApp/releases)
 
 Pull request are welcome. Any contribution to help develop this app further is greatly appreciated.
 
 I hope you find yourself having a better user experience when you're reminded who is really running the show…
-
-[![aryehsilver](https://aryehsilver.co.uk/my-content/DownloadShivisiAppButton.png "Download The Shivisi App")](https://aryehsilver.co.uk/my-content/The%20Shivisi%20App%20Setup%20File.zip)
 
 ## For future releases
 
