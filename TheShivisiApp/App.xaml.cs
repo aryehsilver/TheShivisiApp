@@ -87,9 +87,9 @@
 
     private void ShowSplashScreen() {
       if (SplashScreen) {
-        SplashScreen splash = new("Data/ShivisiSplashScreen.png");
+      SplashScreen splash = new("Data/SplashScreen.png");
         splash.Show(true, true);
-        splash.Close(TimeSpan.FromSeconds(3));
+      splash.Close(TimeSpan.FromSeconds(5));
       }
     }
 
