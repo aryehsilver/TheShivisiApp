@@ -16,26 +16,9 @@
 		<Style x:Key="OverlayStyle" 
            TargetType="Rectangle">
 			<Setter Property="Stroke" 
-              Value="#FFDA8282" />
-			<Setter Property="Fill">
-				<Setter.Value>
-					<LinearGradientBrush EndPoint="0.5,1" 
-                               MappingMode="RelativeToBoundingBox" 
-                               StartPoint="0.5,0">
-						<GradientStop Color="#FF6BBDD2"
-                          Offset="0" />
-						<GradientStop Color="#FFD2CC34"
-                          Offset="0.209" />
-						<GradientStop Color="#FFC2CE8E"
-                          Offset="0.512" />
-						<GradientStop Color="#FF86C0CE"
-                          Offset="0.897" />
-						<GradientStop Color="#E52822"
-                          Offset="0" />
-					</LinearGradientBrush>
-				</Setter.Value>
-			</Setter>
-			<Setter Property="Opacity" 
+              Value="#2d2d2d" />
+      <Setter Property="Fill" Value="#2d2d2d" />
+      <Setter Property="Opacity"
               Value="0.9" />
 		</Style>
 	</telerik:RadWindow.Resources>
@@ -44,6 +27,7 @@
 	</telerik:RadWindow.Icon>
 	<telerik:RadBusyIndicator BusyContent="Saving please wait..."
 														Name="busyIndicator"
+                            Foreground="#fff"
 														OverlayStyle="{StaticResource OverlayStyle}">
 		<Grid gh:GridHelper.GridCols="auto,*"
 					gh:GridHelper.GridRows="auto,auto,auto,auto,*,auto,auto,auto,auto,auto,auto"
