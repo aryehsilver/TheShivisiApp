@@ -7,9 +7,9 @@
 		<EnableDefaultItems>False</EnableDefaultItems>
 		<ApplicationIcon>Data\SNI</ApplicationIcon>
 		<AssemblyName>The Shivisi App</AssemblyName>
-		<AssemblyVersion>2.1.0.0</AssemblyVersion>
-		<FileVersion>2.1.0.0</FileVersion>
-		<Version>2.1</Version>
+		<AssemblyVersion>3.2.0.0</AssemblyVersion>
+		<FileVersion>3.2.0.0</FileVersion>
+		<Version>3.2</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -53,7 +53,7 @@
 
 	<ItemGroup>
 		<Content Include="Data\Logo.png">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Resource Include="Data\SplashScreen.png">
 		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
