@@ -5,13 +5,13 @@
 									 xmlns:telerikNavigation="clr-namespace:Telerik.Windows.Controls.Navigation;assembly=Telerik.Windows.Controls.Navigation"
 									 xmlns:gh="clr-namespace:TheShivisiApp.Helpers"
                    Header="The Shivisi App Settings"
-									 Height="350"
+									 Height="370"
 									 Width="450"
 									 ResizeMode="CanMinimize"
 									 Style="{StaticResource WindowStyle}"
 									 WindowStartupLocation="CenterScreen"
 									 telerikNavigation:RadWindowInteropHelper.ShowInTaskbar="True"
-									 telerik:StyleManager.Theme="Fluent">
+									 telerik:StyleManager.Theme="Windows11">
 	<telerik:RadWindow.Resources>
 		<Style x:Key="OverlayStyle" 
            TargetType="Rectangle">
@@ -47,20 +47,18 @@
 														OverlayStyle="{StaticResource OverlayStyle}">
 		<Grid gh:GridHelper.GridCols="auto,*"
 					gh:GridHelper.GridRows="auto,auto,auto,auto,*,auto,auto,auto,auto,auto,auto"
-					Margin="20">
+					Margin="20, 10, 20, 20">
 
 			<CheckBox Content="Start on system startup"
 								Grid.Column="0"
 								Grid.Row="0"
-								Foreground="White"
-								Margin="0, 0, 5, 15"
+								telerik:StyleManager.Theme="Windows11"
 								Name="startup" />
 
 			<CheckBox Content="Show splash screen"
 								Grid.Column="0"
 								Grid.Row="1"
-								Foreground="White"
-								Margin="0, 0, 5, 15"
+								telerik:StyleManager.Theme="Windows11"
 								Name="splashScreen" />
 
 			<TextBlock Grid.Column="0"
@@ -98,7 +96,7 @@
 
 			<telerik:RadButton Grid.Row="6"
 												 Content="Test"
-												 telerik:StyleManager.Theme="Fluent"
+												 telerik:StyleManager.Theme="Windows11"
 												 Padding="3"
 												 Margin="3, 5, 0, 0"
 												 HorizontalAlignment="Left"
@@ -116,13 +114,13 @@
 								Content="OK"
 								Click="Save_Click"
 								IsDefault="True"
-								telerik:StyleManager.Theme="Fluent" />
+								telerik:StyleManager.Theme="Windows11" />
 				<Button Padding="3"
 								Margin="10, 0"
 								MinWidth="70"
 								Content="Cancel"
 								Click="Cancel_Click"
-								telerik:StyleManager.Theme="Fluent"/>
+								telerik:StyleManager.Theme="Windows11" />
 			</telerik:RadWrapPanel>
 		</Grid>
 	</telerik:RadBusyIndicator>
