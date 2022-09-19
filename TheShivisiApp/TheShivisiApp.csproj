@@ -51,20 +51,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Include="Data\ShivisiAppNewLogo.png">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-		<Content Include="Data\ShivisiIcon.png">
+		<Content Include="Data\Logo.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Data\ShivisiShinAppIcon.png">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
+		<Resource Include="Data\SplashScreen.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
 		<ProjectReference Include="..\NotifyIcon\NotifyIcon.csproj" />
 		<Resource Include="Data\SNI">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</Resource>
-		<Resource Include="Data\ShivisiSplashScreen.png">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
 	</ItemGroup>
