@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net5.0-windows10.0.17763.0</TargetFramework>
+		<TargetFramework>net6.0-windows10.0.17763.0</TargetFramework>
 		<UseWPF>true</UseWPF>
 		<RootNamespace>TheShivisiApp</RootNamespace>
 		<EnableDefaultItems>False</EnableDefaultItems>
@@ -32,6 +32,7 @@
 			<DependentUpon>App.xaml</DependentUpon>
 			<SubType>Code</SubType>
 		</Compile>
+		<Compile Include="GlobalUsings.cs" />
 		<Compile Include="Helpers\GridHelper.cs" />
 		<Compile Include="Helpers\PopTheToast.cs" />
 		<Compile Include="ViewModels\NotifyIconViewModel.cs" />

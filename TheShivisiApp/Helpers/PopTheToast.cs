@@ -1,8 +1,7 @@
 ﻿using Microsoft.Toolkit.Uwp.Notifications;
-using System;
-using System.IO;
 
-namespace TheShivisiApp.Helpers {
+namespace TheShivisiApp.Helpers;
+
   public class PopTheToast {
     public static void PopIt(string notifText) =>
       new ToastContentBuilder()
@@ -13,4 +12,3 @@ namespace TheShivisiApp.Helpers {
           .AddAttributionText("Via TSA")
           .Show(toast => toast.ExpirationTime = DateTime.Now.AddMinutes(1));
   }
-}

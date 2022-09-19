@@ -1,0 +1,10 @@
+﻿global using NotifyIcon;
+global using System;
+global using System.IO;
+global using System.Reflection;
+global using System.Threading.Tasks;
+global using System.Timers;
+global using System.Windows;
+global using Telerik.Windows.Controls;
+global using Telerik.Windows.Controls.MaterialControls;
+global using TheShivisiApp.Helpers;

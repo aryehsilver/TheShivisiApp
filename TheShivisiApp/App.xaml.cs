@@ -1,16 +1,5 @@
-﻿using NotifyIcon;
-using System;
-using System.IO;
-using System.Timers;
-using System.Windows;
-using Telerik.Windows.Controls;
-using Telerik.Windows.Controls.MaterialControls;
-using TheShivisiApp.Helpers;
+﻿namespace TheShivisiApp;
 
-namespace TheShivisiApp {
-  /// <summary>
-  /// Interaction logic for App.xaml
-  /// </summary>
   public partial class App : Application {
     #region Props, Fields & consts
     private static readonly string App_Folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\The Shivisi App";
@@ -143,4 +132,3 @@ namespace TheShivisiApp {
       base.OnExit(e);
     }
   }
-}
