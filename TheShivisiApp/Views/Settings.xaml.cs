@@ -17,6 +17,7 @@ public partial class Settings : RadWindow {
     }
 
     InitializeComponent();
+    version.Text = ("Version " + GetRunningVersion()).Remove(13);
 
     Success = ReadFromXml();
   }
@@ -141,4 +142,7 @@ public partial class Settings : RadWindow {
     NotifText = notifText.CurrentText;
     PopTheToast.PopIt(NotifText);
   }
+
+  public static Version GetRunningVersion() =>
+    Assembly.GetExecutingAssembly().GetName().Version;
 }

@@ -5,7 +5,7 @@
 									 xmlns:telerikNavigation="clr-namespace:Telerik.Windows.Controls.Navigation;assembly=Telerik.Windows.Controls.Navigation"
 									 xmlns:gh="clr-namespace:TheShivisiApp.Helpers"
                    Header="The Shivisi App Settings"
-									 Height="370"
+									 Height="400"
 									 Width="450"
 									 ResizeMode="CanMinimize"
 									 Style="{StaticResource WindowStyle}"
@@ -106,6 +106,12 @@
 								Click="Cancel_Click"
 								telerik:StyleManager.Theme="Windows11" />
 			</telerik:RadWrapPanel>
-		</Grid>
+      
+			<TextBlock Grid.ColumnSpan="2"
+								 Grid.Row="7"
+								 Foreground="White"
+								 Margin="5, 10, 0, 0"
+								 Name="version" />
+    </Grid>
 	</telerik:RadBusyIndicator>
 </telerik:RadWindow>
