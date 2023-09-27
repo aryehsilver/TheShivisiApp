@@ -1,5 +1,9 @@
-﻿global using NotifyIcon;
+﻿global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Toolkit.Uwp.Notifications;
+global using NotifyIcon;
+global using Pixata.Extensions;
 global using System;
+global using System.Collections.ObjectModel;
 global using System.IO;
 global using System.Reflection;
 global using System.Threading.Tasks;
@@ -8,3 +12,6 @@ global using System.Windows;
 global using Telerik.Windows.Controls;
 global using Telerik.Windows.Controls.MaterialControls;
 global using TheShivisiApp.Helpers;
+global using TheShivisiApp.Models;
+global using TheShivisiApp.Views;
+global using Timer = System.Timers.Timer;

@@ -3,19 +3,26 @@
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net6.0-windows10.0.17763.0</TargetFramework>
 		<UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
 		<RootNamespace>TheShivisiApp</RootNamespace>
 		<EnableDefaultItems>False</EnableDefaultItems>
 		<ApplicationIcon>Data\SNI</ApplicationIcon>
 		<AssemblyName>The Shivisi App</AssemblyName>
-		<AssemblyVersion>3.2.2.0</AssemblyVersion>
-		<FileVersion>3.2.2.0</FileVersion>
-		<Version>3.2.2</Version>
+		<AssemblyVersion>4.1.2.0</AssemblyVersion>
+		<FileVersion>4.1.2.0</FileVersion>
+		<Version>4.1.2</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.6" />
 		<PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.2" />
 		<PackageReference Include="Telerik.UI.for.Wpf.NetCore.Xaml" Version="2022.3.912" />
 		<PackageReference Include="Telerik.Windows.Themes.Windows11.for.Wpf" Version="2022.3.912" />
+    <PackageReference Include="Pixata.Extensions" Version="1.25.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -26,7 +33,16 @@
 		<Page Include="Data\NotifyIconResources.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</Page>
-		<Page Include="Views\Settings.xaml">
+		<Page Include="Views\EditQuoteWindow.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</Page>
+		<Page Include="Views\QuotesListWindow.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</Page>
+		<Page Include="Views\QuoteWindow.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</Page>
+		<Page Include="Views\SettingsWindow.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</Page>
 		<Compile Include="App.xaml.cs">
@@ -36,8 +52,12 @@
 		<Compile Include="GlobalUsings.cs" />
 		<Compile Include="Helpers\GridHelper.cs" />
 		<Compile Include="Helpers\PopTheToast.cs" />
+		<Compile Include="Helpers\VersionHelper.cs" />
 		<Compile Include="ViewModels\NotifyIconViewModel.cs" />
-		<Compile Include="Views\Settings.xaml.cs" />
+		<Compile Include="Views\EditQuoteWindow.xaml.cs" />
+		<Compile Include="Views\QuotesListWindow.xaml.cs" />
+		<Compile Include="Views\QuoteWindow.xaml.cs" />
+		<Compile Include="Views\SettingsWindow.xaml.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -59,6 +79,7 @@
 		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
 		<ProjectReference Include="..\NotifyIcon\NotifyIcon.csproj" />
+		<ProjectReference Include="..\TheShivisiApp.Models\TheShivisiApp.Models.csproj" />
 		<Resource Include="Data\SNI">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>

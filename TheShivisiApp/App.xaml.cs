@@ -2,91 +2,59 @@
 
 public partial class App : Application {
   #region Props, Fields & consts
-  private static readonly string App_Folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\The Shivisi App";
-  private TaskbarIcon notifyIcon;
-  private Timer timer;
+  private AppDbContext _context;
+  private TaskbarIcon _notifyIcon;
+  private Timer _timer;
   public DateTime LastRead { get; set; }
-  public bool RunsOnStartup { get; set; } = true;
-  public bool SplashScreen { get; set; } = true;
-  public double Interval { get; set; } = 30;
-  public string NotifText { get; set; } = "Remember!" + Environment.NewLine + "You're not the one in charge here!";
+  public Settings Settings { get; set; } = new();
   #endregion
 
   protected override void OnStartup(StartupEventArgs e) {
     base.OnStartup(e);
-    //create the notifyicon (it's a resource declared in NotifyIconResources.xaml)
-    notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
 
-    StyleManager.ApplicationTheme = new Windows11Theme();
-    Windows11Palette.LoadPreset(Windows11Palette.ColorVariation.Dark);
-    ThemeEffectsHelper.IsAcrylicEnabled = false;
+    bool showSettings = true;
 
-    Start();
-  }
+    // Listen to notification activation
+    ToastNotificationManagerCompat.OnActivated += toastArgs => {
+      // Obtain the arguments from the notification
+      ToastArguments args = ToastArguments.Parse(toastArgs.Argument);
 
-  public void Start() {
-    if (!Directory.Exists(App_Folder)) {
-      Directory.CreateDirectory(App_Folder);
-    }
+      // Obtain any user input (text boxes, menu selections) from the notification
+      //ValueSet userInput = toastArgs.UserInput;
 
-    ReadFromXml();
+      // Need to dispatch to UI thread if performing UI operations
+      Current.Dispatcher.Invoke(delegate {
+        QuoteWindow quoteWindow = new(args.FirstOrDefault(a => a.Key == "Text").Value, args.FirstOrDefault(a => a.Key == "Source").Value, args.FirstOrDefault(a => a.Key == "Id").Value);
+        quoteWindow.Show();
+        quoteWindow.IsTopmost = true;
+        quoteWindow.IsTopmost = false;
+        quoteWindow.Focus();
+      });
 
-    ShowSplashScreen();
-    RunTimer();
-  }
+      showSettings = false;
+    };
 
-  private void ReadFromXml() {
-    bool success;
-    Exception exception = new();
+    if (showSettings) {
+      _context = new();
+      _context.Database.Migrate();
 
-    try {
-      if (File.Exists(Path.Combine(App_Folder, "Settings.xml"))) {
-        System.Xml.XmlDocument readFile = new();
-        readFile.Load(Path.Combine(App_Folder, "Settings.xml"));
+      //create the notifyIcon (it's a resource declared in NotifyIconResources.xaml)
+      _notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
 
-        System.Xml.XmlNode startupNode = readFile.SelectSingleNode("/Settings/Startup");
-        RunsOnStartup = startupNode.InnerText == "True";
+      StyleManager.ApplicationTheme = new Windows11Theme();
+      Windows11Palette.LoadPreset(Windows11Palette.ColorVariation.Dark);
+      ThemeEffectsHelper.IsAcrylicEnabled = false;
 
-        System.Xml.XmlNode splashScreenNode = readFile.SelectSingleNode("/Settings/SplashScreen");
-        SplashScreen = splashScreenNode.InnerText == "True";
-
-        System.Xml.XmlNode intervalNode = readFile.SelectSingleNode("/Settings/Interval");
-        Interval = double.TryParse(intervalNode.InnerText, out double outInterval) ? outInterval : 30;
-
-        System.Xml.XmlNode notifTextNode = readFile.SelectSingleNode("/Settings/NotifText");
-        NotifText = notifTextNode.InnerText;
-      } else {
-        RunsOnStartup = true;
-        SplashScreen = true;
-        Interval = 30;
-        NotifText = "Remember!" + Environment.NewLine + "You're not the one in charge here!";
-      }
-
+      Settings = _context.Settings.SingleOrDefault();
       LastRead = DateTime.Now;
 
-      if (Interval <= 0) {
-        RadWindow.Alert(new DialogParameters {
-          Header = "Error",
-          Content = "The interval value must be greater than 0" + Environment.NewLine + "1 minute intervals will be used instead"
-        });
-        Interval = 1;
-      }
-      success = true;
-    } catch (Exception ex) {
-      success = false;
-      exception = ex;
-    }
-
-    if (!success) {
-      RadWindow.Alert(new DialogParameters {
-        Header = "The Shivisi App - Error",
-        Content = "Error reading the settings" + Environment.NewLine + exception.Message
-      });
+      ShowSplashScreen();
+      RunTimer();
     }
   }
 
   private void ShowSplashScreen() {
-    if (SplashScreen) {
+    if (Settings.ShowSplashScreen) {
       SplashScreen splash = new("Data/SplashScreen.png");
       splash.Show(true, true);
       splash.Close(TimeSpan.FromSeconds(5));
@@ -94,41 +62,42 @@ public partial class App : Application {
   }
 
   private void RunTimer() {
-    timer = new Timer {
+    _timer = new Timer {
       // [1 min = 60,000 | 5 min = 300,000 | 30 min = 1,800,000 | 1 hr = 3,600,000]
-      Interval = Interval * 60000
+      Interval = Settings.Interval * 60000
     };
-    timer.Start();
-    timer.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
+    _timer.Start();
+    _timer.Elapsed += new ElapsedEventHandler(Timer_Elapsed);
   }
 
-  private void Timer_Elapsed(object sender, ElapsedEventArgs e) {
+  private async void Timer_Elapsed(object sender, ElapsedEventArgs e) {
     // ISSUE: This will only get hit the next time the timer finishes it's elapsed time.
     // What if the user has chosen a smaller interval, say from 30 min down to 5,
     // how will the app know to change it until another 30 min passes and we hit the elapsed?
     // Settings need to raise an event which will be picked up here...
-    CheckTimeStamps();
-    PopTheToast.PopIt(NotifText);
+    await CheckTimeStamps();
+    if (Settings.UseRandomQuote) {
+      Random random = new();
+      List<Quote> quotesList = await _context.Quotes.ToListAsync();
+      int rnd = random.Next(quotesList.Count);
+      Quote quote = quotesList.FirstOrDefault(q => q.Id == rnd);
+      PopTheToast.PopIt(quote.QuotedText, quote.Source, quote.Id);
+    } else {
+      PopTheToast.PopIt($"Remember!{Environment.NewLine}You're not the one in charge here!", $"Via TSA - {$"Version {VersionHelper.GetRunningVersion()}".Remove(13)}", 0);
+    }
   }
 
-  private void CheckTimeStamps() {
-    DateTime time = File.GetLastWriteTime(Path.Combine(App_Folder, "Settings.xml"));
-    if (LastRead < time) {
-      System.Xml.XmlDocument readFile = new();
-      readFile.Load(Path.Combine(App_Folder, "Settings.xml"));
-
-      System.Xml.XmlNode intervalNode = readFile.SelectSingleNode("/Settings/Interval");
-      timer.Interval = (double.TryParse(intervalNode.InnerText, out double outInterval) ? outInterval : 30) * 60000;
-
-      System.Xml.XmlNode notifTextNode = readFile.SelectSingleNode("/Settings/NotifText");
-      NotifText = notifTextNode.InnerText;
-
+  private async Task CheckTimeStamps() {
+    DateTime lastUpdated = Settings.LastUpdated;
+    if (LastRead < lastUpdated) {
+      Settings = await _context.Settings.SingleOrDefaultAsync();
+      _timer.Interval = Settings.Interval * 60000;
       LastRead = DateTime.Now;
     }
   }
 
   protected override void OnExit(ExitEventArgs e) {
-    notifyIcon.Dispose(); // the icon would clean up automatically, but this is cleaner
+    _notifyIcon.Dispose(); // the icon would clean up automatically, but this is cleaner
     base.OnExit(e);
   }
 }

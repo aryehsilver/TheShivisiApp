@@ -1,0 +1,54 @@
+﻿<telerik:RadWindow x:Class="TheShivisiApp.Views.QuoteWindow"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+									 xmlns:telerikNavigation="clr-namespace:Telerik.Windows.Controls.Navigation;assembly=Telerik.Windows.Controls.Navigation"
+									 xmlns:gh="clr-namespace:TheShivisiApp.Helpers"
+                   Header="The Shivisi App Quote"
+									 Height="250"
+									 Width="450"
+                   MinWidth="450"
+                   MaxWidth="450"
+                   MinHeight="200"
+									 Style="{StaticResource WindowStyle}"
+									 WindowStartupLocation="CenterScreen"
+									 telerikNavigation:RadWindowInteropHelper.ShowInTaskbar="True"
+									 telerik:StyleManager.Theme="Windows11">
+  <telerik:RadWindow.Resources>
+    <Style x:Key="OverlayStyle" 
+           TargetType="Rectangle">
+      <Setter Property="Stroke" 
+              Value="#2d2d2d" />
+      <Setter Property="Fill" Value="#2d2d2d" />
+      <Setter Property="Opacity"
+              Value="0.9" />
+    </Style>
+  </telerik:RadWindow.Resources>
+  <telerik:RadWindow.Icon>
+    <Image Source="../Data/SNI" Width="24" Margin="5" />
+  </telerik:RadWindow.Icon>
+  <Grid gh:GridHelper.GridCols="auto"
+				gh:GridHelper.GridRows="*, auto, auto, auto, auto"
+				Margin="20, 10, 20, 10">
+    <TextBlock Name="textBlock"
+               Grid.Row="0"
+               Foreground="#fff"
+               Width="410"
+               TextWrapping="Wrap" />
+    <TextBlock Name="sourceBlock"
+               Grid.Row="1"
+               FontSize="11"
+               Margin="0, 10"
+               Foreground="Gray"
+               TextWrapping="Wrap" />
+
+    <telerik:RadButton Name="edit"
+                       Grid.Row="2"
+                       Content="Edit"
+                       Width="110"
+                       Margin="2, 6"
+                       Visibility="Collapsed"
+                       HorizontalAlignment="Right"
+                       Click="Edit_Click" />
+  </Grid>
+</telerik:RadWindow>

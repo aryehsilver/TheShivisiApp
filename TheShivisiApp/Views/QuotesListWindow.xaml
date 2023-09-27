@@ -1,0 +1,121 @@
+﻿<telerik:RadWindow x:Class="TheShivisiApp.Views.QuotesListWindow"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+									 xmlns:telerikNavigation="clr-namespace:Telerik.Windows.Controls.Navigation;assembly=Telerik.Windows.Controls.Navigation"
+									 xmlns:gh="clr-namespace:TheShivisiApp.Helpers"
+                   Header="Quotes"
+									 Height="500"
+									 Width="900"
+                   ResizeMode="CanMinimize"
+									 Style="{StaticResource WindowStyle}"
+									 WindowStartupLocation="CenterScreen"
+									 telerikNavigation:RadWindowInteropHelper.ShowInTaskbar="True"
+									 telerik:StyleManager.Theme="Windows11">
+  <telerik:RadWindow.Resources>
+    <Style x:Key="OverlayStyle" 
+           TargetType="Rectangle">
+      <Setter Property="Stroke" 
+              Value="#2d2d2d" />
+      <Setter Property="Fill" Value="#2d2d2d" />
+      <Setter Property="Opacity"
+              Value="0.9" />
+    </Style>
+  </telerik:RadWindow.Resources>
+  <telerik:RadWindow.Icon>
+    <Image Source="../Data/SNI" Width="24" Margin="5" />
+  </telerik:RadWindow.Icon>
+  <Grid gh:GridHelper.GridCols="*, *"
+        gh:GridHelper.GridRows="auto, *, auto, auto, auto, auto"
+				Margin="20, 10, 20, 20">
+    <telerik:RadWatermarkTextBox Grid.Column="0"
+																 Grid.Row="0"
+																 Name="search"
+																 Padding="5"
+                                 Margin="-2, 7"
+                                 WatermarkContent="Search"
+																 AcceptsReturn="False"
+																 WatermarkBehavior="HideOnTextEntered"
+																 SpellCheck.IsEnabled="True"
+                                 TextChanged="SearchText_Changed" />
+
+    <telerik:RadButton Grid.Row="0"
+                       Grid.Column="1"
+                       Content="New"
+                       HorizontalAlignment="Right"
+                       Margin="0, 0, 0, 10"
+                       Click="New_Click" />
+    
+    <telerik:RadListBox x:Name="list"
+												telerik:StyleManager.Theme="Windows11"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        SelectedValuePath="Id"
+                        SelectionChanged="ListSelected_Changed">
+      <telerik:RadListBox.ItemContainerStyle>
+        <Style TargetType="telerik:RadListBoxItem">
+          <EventSetter Event="PreviewGotKeyboardFocus" Handler="On_Focus" />
+        </Style>
+      </telerik:RadListBox.ItemContainerStyle>
+      <telerik:RadListBox.ItemTemplate>
+        <DataTemplate>
+          <Grid gh:GridHelper.GridCols="*, auto" Width="800">
+            <TextBlock Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       Padding="0, 9"
+                       TextWrapping="Wrap"
+                       HorizontalAlignment="Left">
+              <Run Text="{Binding QuotedText}" />
+              <Run Text="(" FontSize="11" Foreground="#c3c3c3" /><Run Text="{Binding Source}" FontSize="11" Foreground="#c3c3c3" /><Run Text=")" FontSize="11" Foreground="#c3c3c3" />
+            </TextBlock>
+
+            <StackPanel Grid.Column="1"
+                        Orientation="Horizontal"
+                        Background="#454545"
+                        telerik:CornerRadiusHelper.ClipRadius="5">
+              <StackPanel.Style>
+                <Style TargetType="{x:Type StackPanel}">
+                  <Setter Property="Visibility" Value="Hidden" />
+                  <Style.Triggers>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type telerik:RadListBoxItem}}, Path=IsMouseOver}" Value="True">
+                      <Setter Property="Visibility" Value="Visible" />
+                    </DataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </StackPanel.Style>
+              <telerik:RadButton Width="50"
+                                 Click="Delete_Click">
+                <telerik:RadGlyph Glyph="&#xe10c;" FontSize="16" />
+              </telerik:RadButton>
+              <telerik:RadButton Width="50"
+                                 Click="Edit_Click">
+                <telerik:RadGlyph Glyph="&#xe10b;" FontSize="16" />
+              </telerik:RadButton>
+            </StackPanel>
+
+            <!--<StackPanel Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Background="#454545"
+                        VerticalAlignment="Center"
+                        telerik:CornerRadiusHelper.ClipRadius="5">
+              <StackPanel.Style>
+                <Style TargetType="{x:Type StackPanel}">
+                  <Setter Property="Visibility" Value="Hidden" />
+                  <Style.Triggers>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type telerik:RadListBoxItem}}, Path=IsSelected}" Value="True">
+                      <Setter Property="Visibility" Value="Visible" />
+                    </DataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </StackPanel.Style>
+              <TextBox Text="{Binding QuotedText}"
+                       Padding="5"
+										   telerik:StyleManager.Theme="Windows11"
+                       TextChanged="Text_Changed" />
+            </StackPanel>-->
+          </Grid>
+        </DataTemplate>
+      </telerik:RadListBox.ItemTemplate>
+    </telerik:RadListBox>
+  </Grid>
+</telerik:RadWindow>

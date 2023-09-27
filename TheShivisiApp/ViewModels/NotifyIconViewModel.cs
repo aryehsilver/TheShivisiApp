@@ -1,5 +1,4 @@
 ﻿using System.Windows.Input;
-using TheShivisiApp.Views;
 
 namespace TheShivisiApp.ViewModels;
 
@@ -9,16 +8,24 @@ namespace TheShivisiApp.ViewModels;
 /// in App.xaml.cs could have created this view model, and assigned it to the NotifyIcon.
 /// </summary>
 public class NotifyIconViewModel {
-  /// <summary>
-  /// Shows a window, if none is already open.
-  /// </summary>
   public ICommand ShowWindowCommand => new DelegateCommand {
-    CanExecuteFunc = () => Application.Current.MainWindow == null,
+    //CanExecuteFunc = () => Application.Current.MainWindow == null,
     CommandAction = () => {
-      Settings settings = new Settings();
-      if (settings.Success) {
-        settings.Show();
-      }
+      new SettingsWindow().Show();
+    }
+  };
+
+  public ICommand ShowQuotesCommand => new DelegateCommand {
+    //CanExecuteFunc = () => Application.Current.MainWindow == null,
+    CommandAction = () => {
+      new QuotesListWindow().Show();
+    }
+  };
+
+  public ICommand NewQuoteWindowCommand => new DelegateCommand {
+    //CanExecuteFunc = () => Application.Current.MainWindow == null,
+    CommandAction = () => {
+      new EditQuoteWindow(new()).Show();
     }
   };
 
@@ -37,10 +44,6 @@ public class NotifyIconViewModel {
     new DelegateCommand { CommandAction = () => Application.Current.Shutdown() };
 }
 
-
-/// <summary>
-/// Simplistic delegate command for the demo.
-/// </summary>
 public class DelegateCommand : ICommand {
   public Action CommandAction { get; set; }
   public Func<bool> CanExecuteFunc { get; set; }
