@@ -1,0 +1,131 @@
+﻿<telerik:RadWindow x:Class="TheShivisiApp.Views.AboutWindow"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+									 xmlns:telerikNavigation="clr-namespace:Telerik.Windows.Controls.Navigation;assembly=Telerik.Windows.Controls.Navigation"
+									 xmlns:gh="clr-namespace:TheShivisiApp.Helpers"
+                   Name="window"
+									 Height="450"
+									 Width="450"
+									 ResizeMode="NoResize"
+									 Style="{StaticResource WindowStyle}"
+									 WindowStartupLocation="CenterScreen"
+									 telerikNavigation:RadWindowInteropHelper.ShowInTaskbar="True"
+									 telerik:StyleManager.Theme="Windows11">
+  <telerik:RadWindow.Resources>
+    <Style x:Key="OverlayStyle" 
+           TargetType="Rectangle">
+      <Setter Property="Stroke" 
+              Value="#0000" />
+      <Setter Property="Fill" Value="#0000" />
+      <Setter Property="Opacity"
+              Value="1" />
+    </Style>
+  </telerik:RadWindow.Resources>
+  <telerik:RadWindow.Icon>
+    <Image Source="../Data/SNI" Width="24" Margin="5" />
+  </telerik:RadWindow.Icon>
+  <telerik:RadTabControl SelectedIndex="0"
+                         SelectionChanged="Tab_Changed">
+    <telerik:RadTabControl.Items>
+      <telerik:RadTabItem Header="App details">
+        <Grid gh:GridHelper.GridRows="auto, auto, auto, auto, auto, auto, auto, auto"
+				      Margin="20, 10, 20, 20">
+          <TextBlock Grid.Row="0"
+                     Margin="0, 0, 0, 5"
+                     HorizontalAlignment="Center"
+                     FontSize="32"
+                     FontWeight="Bold"
+                     Text="The Shivisi App" />
+          <Image Grid.Row="1"
+                 Source="../Data/LargeLogo.png"
+                 Width="100"
+                 Margin="5" />
+          <TextBlock Grid.Row="2"
+                     Margin="0, 0, 0, 10"
+                     HorizontalAlignment="Center"
+                     Name="version" />
+          <TextBlock Grid.Row="3"
+                     Margin="0, 0, 0, 10"
+                     HorizontalAlignment="Center">
+            <Hyperlink telerik:StyleManager.Theme="Windows11"
+                       Click="Releases_Click">Release notes</Hyperlink>
+          </TextBlock>
+          <telerik:RadButton Grid.Row="4"
+                             Name="update"
+                             Content="Check for updates"
+                             Width="200"
+                             Height="50"
+                             Margin="0, 0, 0, 15"
+                             Click="CheckForUpdates_Click" />
+          <telerik:RadButton Grid.Row="4"
+                             Name="doUpdate"
+                             Width="200"
+                             Height="50"
+                             Margin="0, 0, 0, 15"
+                             Visibility="Collapsed"
+                             Click="DoUpdate_Click" />
+          <telerik:RadBusyIndicator Grid.Row="5"
+                                    Name="busyLoader"
+                                    IsBusy="False"
+                                    BusyContent=""
+                                    Margin="0, -81.5, 0, 0"
+                                    OverlayStyle="{StaticResource OverlayStyle}" />
+          <TextBlock Grid.Row="5"
+                     Margin="0, 0, 0, 5"
+                     HorizontalAlignment="Center">
+            <Run Text="©" />
+            <Run Name="date" />
+            <Run Text="A project by" />
+            <Hyperlink telerik:StyleManager.Theme="Windows11"
+                       Click="Creator_Click">All Dev</Hyperlink>
+          </TextBlock>
+        </Grid>
+      </telerik:RadTabItem>
+      <telerik:RadTabItem Header="About">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Auto"
+								      telerik:StyleManager.Theme="Windows11">
+          <Grid gh:GridHelper.GridRows="auto, auto, auto, auto, *, auto, auto, auto, auto"
+				        Margin="20, 10, 20, 20">
+            <TextBlock Grid.Row="0"
+                       Margin="0, 0, 0, 5"
+                       TextWrapping="Wrap"
+                       Width="380"
+                       Text="Computers are the most incredible devices. Yet they are also the most abused devices too. When your having a hard day and then your PC freezes or does things you never asked it to, we tend to put the blame on the computer. We will curse it whether out loud or in our minds. Sometimes even threatening it, other times almost smashing the screen etc." />
+            <TextBlock Grid.Row="1"
+                       Margin="0, 5"
+                       TextWrapping="Wrap"
+                       Width="380"
+                       Text="However when we have a good day i.e. nothing goes wrong, and the PC does what it is made to do, we never compliment it. We never say things like &quot;Well done computer!&quot; We just feel good about ourselves that we're getting stuff done." />
+            <TextBlock Grid.Row="2"
+                       Margin="0, 5"
+                       TextWrapping="Wrap"
+                       Width="380"
+                       Text="We somehow feel emotionally connected to our technological devices. It's a very strange thing." />
+            <TextBlock Grid.Row="3"
+                       Margin="0, 5"
+                       TextWrapping="Wrap"
+                       Width="380"
+                       Text="I'm not going to give you any understanding on why we feel this way - I'll leave that to the psychologists to reason about." />
+            <TextBlock Grid.Row="4"
+                       Margin="0, 5"
+                       TextWrapping="Wrap"
+                       Width="380"
+                       Text="What we do usually forget though, is that there is One Above who is controlling our every move. He is the one who decides if the device should stop responding or do what we requested of it. When something doesn't go well, it is due to Him testing us. When things go well too, it is He who has decided that we should have that enjoyment." />
+            <TextBlock Grid.Row="5"
+                       Margin="0, 5"
+                       TextWrapping="Wrap"
+                       Width="380"
+                       Text="The problem is, when we're in the midst of doing something, we get so caught up in what we're doing it is all too easy to forget that. What we really need is someone or something to remind us right when we're getting worked up that its not working, that we are not in charge. If only we would have that little reminder, we might realise it's not something we should get worked up about. It's definitely not the computers fault." />
+            <TextBlock Grid.Row="6"
+                       Margin="0, 5"
+                       TextWrapping="Wrap"
+                       Width="380"
+                       Text="'The Shivisi App' was born to do just that. The program starts on system start-up, and runs quietly in the background. Every 30 minutes it pops up a toast notification to let the user know Who is in charge. A randomly selected quote (one of 128) is shown along with it's source. An icon is added to the tray notifications area. By clicking on the icon or by right clicking and selecting 'open settings' you can customise things like whether there should be a splash screen on startup, how long the intervals are, whether to start on system start-up and what text to show on the notification. The shown quotes can be managed from the 'view quotes'." />
+          </Grid>
+        </ScrollViewer>
+      </telerik:RadTabItem>
+    </telerik:RadTabControl.Items>
+  </telerik:RadTabControl>
+</telerik:RadWindow>

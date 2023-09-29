@@ -135,8 +135,13 @@
       <TextBlock Grid.ColumnSpan="2"
 								 Grid.Row="7"
 								 Foreground="White"
-								 Margin="5, 10, 0, 0"
-								 Name="version" />
+								 Margin="5, 10, 0, 0">
+				<Hyperlink telerik:StyleManager.Theme="Windows11"
+									 Click="Hyperlink_Click">
+          <Run Name="version"
+               FontSize="12" />
+        </Hyperlink>
+      </TextBlock>
       <TextBlock Grid.ColumnSpan="2"
 								 Grid.Row="7"
                  Text="Last updated: Wednesday 15 September 2023 08:85 PM"

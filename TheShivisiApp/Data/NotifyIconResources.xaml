@@ -11,6 +11,7 @@
 		<MenuItem Header="Open settings" Command="{Binding ShowWindowCommand}" />
     <MenuItem Header="View quotes" Command="{Binding ShowQuotesCommand}" />
     <MenuItem Header="New quote" Command="{Binding NewQuoteWindowCommand}" />
+    <MenuItem Header="Check for updates" Command="{Binding CheckForUpdatesCommand}" />
 		<!--<MenuItem Header="Close Settings" Command="{Binding HideWindowCommand}" />-->
 		<Separator />
 		<MenuItem Header="Exit" Command="{Binding ExitApplicationCommand}" />

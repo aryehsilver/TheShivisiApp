@@ -10,7 +10,7 @@ public partial class SettingsWindow : RadWindow {
   public SettingsWindow() {
     InitializeComponent();
     _context = new();
-    version.Text = ("Version " + VersionHelper.GetRunningVersion()).Remove(13);
+    version.Text = $"Version {VersionHelper.GetRunningVersion()}".Remove(13);
 
     Settings = _context.Settings.SingleOrDefault();
     lastUpdated.Text = $"Last updated: {Settings.LastUpdated:dddd dd MMMM yyyy hh:mm tt}";
@@ -83,4 +83,7 @@ public partial class SettingsWindow : RadWindow {
       PopTheToast.PopIt(!string.IsNullOrWhiteSpace(notifText.CurrentText) ? notifText.CurrentText : $"Remember!{Environment.NewLine}You're not the one in charge here!", $"Via TSA - {$"Version {VersionHelper.GetRunningVersion()}".Remove(13)}", 0);
     }
   }
+
+  private void Hyperlink_Click(object sender, RoutedEventArgs e) =>
+    new AboutWindow().Show();
 }

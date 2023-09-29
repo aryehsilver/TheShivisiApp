@@ -23,12 +23,18 @@ public partial class App : Application {
       //ValueSet userInput = toastArgs.UserInput;
 
       // Need to dispatch to UI thread if performing UI operations
-      Current.Dispatcher.Invoke(delegate {
-        QuoteWindow quoteWindow = new(args.FirstOrDefault(a => a.Key == "Text").Value, args.FirstOrDefault(a => a.Key == "Source").Value, args.FirstOrDefault(a => a.Key == "Id").Value);
-        quoteWindow.Show();
-        quoteWindow.IsTopmost = true;
-        quoteWindow.IsTopmost = false;
-        quoteWindow.Focus();
+      Current.Dispatcher.Invoke(async delegate {
+        if (!args.Any(a => a.Key == "Update")) {
+          QuoteWindow quoteWindow = new(args.FirstOrDefault(a => a.Key == "Text").Value, args.FirstOrDefault(a => a.Key == "Source").Value, args.FirstOrDefault(a => a.Key == "Id").Value);
+          quoteWindow.Show();
+          quoteWindow.IsTopmost = true;
+          quoteWindow.IsTopmost = false;
+          quoteWindow.Focus();
+        } else {
+          if (args.Any(a => a.Key == "Update" && a.Value == "download")) {
+            await UpdateHelper.DownloadUpdate(args.FirstOrDefault(a => a.Key == "Version").Value);
+          }
+        }
       });
 
       showSettings = false;
@@ -51,6 +57,8 @@ public partial class App : Application {
       ShowSplashScreen();
       RunTimer();
     }
+
+    _ = UpdateHelper.CheckForUpdates();
   }
 
   private void ShowSplashScreen() {

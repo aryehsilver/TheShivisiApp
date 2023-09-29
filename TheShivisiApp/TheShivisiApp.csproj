@@ -20,6 +20,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.6" />
 		<PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.2" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Telerik.UI.for.Wpf.NetCore.Xaml" Version="2022.3.912" />
 		<PackageReference Include="Telerik.Windows.Themes.Windows11.for.Wpf" Version="2022.3.912" />
     <PackageReference Include="Pixata.Extensions" Version="1.25.0" />
@@ -32,6 +33,9 @@
 		</ApplicationDefinition>
 		<Page Include="Data\NotifyIconResources.xaml">
 			<Generator>MSBuild:Compile</Generator>
+		</Page>
+		<Page Include="Views\AboutWindow.xaml">
+		  <Generator>MSBuild:Compile</Generator>
 		</Page>
 		<Page Include="Views\EditQuoteWindow.xaml">
 		  <Generator>MSBuild:Compile</Generator>
@@ -52,8 +56,10 @@
 		<Compile Include="GlobalUsings.cs" />
 		<Compile Include="Helpers\GridHelper.cs" />
 		<Compile Include="Helpers\PopTheToast.cs" />
+		<Compile Include="Helpers\UpdateHelper.cs" />
 		<Compile Include="Helpers\VersionHelper.cs" />
 		<Compile Include="ViewModels\NotifyIconViewModel.cs" />
+		<Compile Include="Views\AboutWindow.xaml.cs" />
 		<Compile Include="Views\EditQuoteWindow.xaml.cs" />
 		<Compile Include="Views\QuotesListWindow.xaml.cs" />
 		<Compile Include="Views\QuoteWindow.xaml.cs" />
@@ -73,6 +79,9 @@
 
 	<ItemGroup>
 		<Content Include="Data\Logo.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Data\LargeLogo.png">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Resource Include="Data\SplashScreen.png">

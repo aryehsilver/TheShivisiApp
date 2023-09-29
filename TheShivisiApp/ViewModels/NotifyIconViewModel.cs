@@ -29,6 +29,13 @@ public class NotifyIconViewModel {
     }
   };
 
+  public ICommand CheckForUpdatesCommand => new DelegateCommand {
+    //CanExecuteFunc = () => Application.Current.MainWindow == null,
+    CommandAction = () => {
+      new AboutWindow(true).Show();
+    }
+  };
+
   /// <summary>
   /// Hides the main window. This command is only enabled if a window is open.
   /// </summary>
