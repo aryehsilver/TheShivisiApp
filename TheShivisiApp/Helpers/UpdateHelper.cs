@@ -6,6 +6,8 @@ using System.Net.Http.Headers;
 namespace TheShivisiApp.Helpers;
 
 public static class UpdateHelper {
+  private static string _filePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\The Shivisi App";
+
   public static async Task<(bool, string)> CheckForUpdates() {
     string Url = "https://api.github.com/repos/aryehsilver/TheShivisiApp/releases";
     try {
@@ -26,14 +28,13 @@ public static class UpdateHelper {
   public static async Task DownloadUpdate(string version) {
     string Url = $"https://github.com/aryehsilver/TheShivisiApp/releases/download/v{version}/The.Shivisi.App.Setup.exe";
     Debug.WriteLine(Url);
-    string filePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\The Shivisi App";
     try {
-      if (!Directory.Exists(filePath)) {
-        Directory.CreateDirectory(filePath);
+      if (!Directory.Exists(_filePath)) {
+        Directory.CreateDirectory(_filePath);
       }
-      filePath += "\\New_Version.exe";
-      await DownloadTheFile(filePath, Url);
-      StartInstallerAndExit(filePath);
+      _filePath += "\\New_Version.exe";
+      await DownloadTheFile(_filePath, Url);
+      StartInstallerAndExit(_filePath);
     } catch (Exception ex) {
       Debug.WriteLine("Download update error: " + ex.Message);
     }
@@ -56,6 +57,16 @@ public static class UpdateHelper {
   private static void StartInstallerAndExit(string filePath) {
     Process.Start(new ProcessStartInfo(filePath) { UseShellExecute = true });
     Application.Current.Shutdown();
+  }
+
+  public static void CleanUpInstallationFiles() {
+    try {
+      if (File.Exists(_filePath + "\\New_Version.exe")) {
+        File.Delete(_filePath + "\\New_Version.exe");
+      }
+    } catch (Exception ex) {
+      Debug.WriteLine("Error cleaning up installation files: " + ex.Message);
+    }
   }
 }
 

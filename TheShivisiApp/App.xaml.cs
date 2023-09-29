@@ -59,6 +59,7 @@ public partial class App : Application {
     }
 
     _ = UpdateHelper.CheckForUpdates();
+    UpdateHelper.CleanUpInstallationFiles();
   }
 
   private void ShowSplashScreen() {
