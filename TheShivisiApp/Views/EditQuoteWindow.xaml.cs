@@ -20,6 +20,7 @@ public partial class EditQuoteWindow : RadWindow {
     Quote.Source = source.Text;
     _context.Quotes.Update(Quote);
     await _context.SaveChangesAsync();
+    Close();
   }
 
   private void Cancel_Click(object sender, RoutedEventArgs e) =>
