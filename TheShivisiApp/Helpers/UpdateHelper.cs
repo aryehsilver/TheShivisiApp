@@ -13,10 +13,9 @@ public static class UpdateHelper {
     string Url = "https://api.github.com/repos/aryehsilver/TheShivisiApp/releases";
     string bearerToken = await GetBearerToken();
     if (!string.IsNullOrWhiteSpace(bearerToken)) {
-      HttpResponseMessage response = new();
       try {
-        using HttpClient client = CreateClient(bearerToken);
-        response = await client.GetAsync(Url);
+        using HttpClient client = CreateClient($"github_pat_{bearerToken.CleanUpBearerToken()}");
+        HttpResponseMessage response = await client.GetAsync(Url);
         if (response.StatusCode is HttpStatusCode.Unauthorized or HttpStatusCode.Forbidden) {
           using AppDbContext context = new();
           if (new BearerTokenWindow().ShowDialog() ?? false) {
@@ -74,7 +73,7 @@ public static class UpdateHelper {
 
   private static async Task DownloadTheFile(string filePath, string url) {
     using AppDbContext context = new();
-    using HttpClient client = CreateClient((await context.Settings.SingleOrDefaultAsync()).BearerToken);
+    using HttpClient client = CreateClient($"github_pat_{(await context.Settings.SingleOrDefaultAsync()).BearerToken.CleanUpBearerToken()}");
     using Stream downloadStream = await client.GetStreamAsync(url);
     using FileStream fileStream = File.Create(filePath);
     await downloadStream.CopyToAsync(fileStream);
@@ -101,6 +100,9 @@ public static class UpdateHelper {
       Debug.WriteLine("Error cleaning up installation files: " + ex.Message);
     }
   }
+
+  private static string CleanUpBearerToken(this string bearer) =>
+    bearer.Replace("$", "").Replace("-", "").Replace("~", "").Replace("=", "").Replace("@", "");
 }
 
 #region Json Classes
