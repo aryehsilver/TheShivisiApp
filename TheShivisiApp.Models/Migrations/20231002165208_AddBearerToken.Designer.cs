@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheShivisiApp.Models;
 
@@ -10,9 +11,10 @@ using TheShivisiApp.Models;
 namespace TheShivisiApp.Models.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231002165208_AddBearerToken")]
+    partial class AddBearerToken
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.6");
@@ -816,9 +818,6 @@ namespace TheShivisiApp.Models.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("CheckUpdatesOnStartup")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("Interval")
                         .HasColumnType("INTEGER");
 
@@ -847,9 +846,8 @@ namespace TheShivisiApp.Models.Migrations
                         {
                             Id = 1,
                             BearerToken = "",
-                            CheckUpdatesOnStartup = true,
                             Interval = 30,
-                            LastUpdated = new DateTime(2023, 10, 3, 12, 43, 41, 732, DateTimeKind.Local).AddTicks(3493),
+                            LastUpdated = new DateTime(2023, 10, 2, 17, 52, 8, 275, DateTimeKind.Local).AddTicks(6869),
                             NotifText = "",
                             RunOnStartUp = true,
                             ShowSplashScreen = true,
