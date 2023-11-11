@@ -8,9 +8,9 @@
 		<EnableDefaultItems>False</EnableDefaultItems>
 		<ApplicationIcon>Data\SNI</ApplicationIcon>
 		<AssemblyName>The Shivisi App</AssemblyName>
-		<AssemblyVersion>4.2.2.0</AssemblyVersion>
-		<FileVersion>4.2.2.0</FileVersion>
-		<Version>4.2.2</Version>
+		<AssemblyVersion>4.2.3.0</AssemblyVersion>
+		<FileVersion>4.2.3.0</FileVersion>
+		<Version>4.2.3</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
