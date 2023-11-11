@@ -10,6 +10,7 @@ public partial class QuoteWindow : RadWindow {
     if (int.TryParse(id, out Id) && Id > 0) {
       edit.Visibility = Visibility.Visible;
     }
+    close.Focus();
   }
 
   private async void Edit_Click(object sender, RoutedEventArgs e) {
@@ -17,4 +18,7 @@ public partial class QuoteWindow : RadWindow {
     new EditQuoteWindow(await context.Quotes.FirstOrDefaultAsync(q => q.Id == Id)).Show();
     Close();
   }
+
+  private void Close_Click(object sender, RoutedEventArgs e) =>
+    Close();
 }

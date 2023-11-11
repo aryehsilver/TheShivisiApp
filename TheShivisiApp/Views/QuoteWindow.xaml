@@ -14,16 +14,6 @@
 									 WindowStartupLocation="CenterScreen"
 									 telerikNavigation:RadWindowInteropHelper.ShowInTaskbar="True"
 									 telerik:StyleManager.Theme="Windows11">
-  <telerik:RadWindow.Resources>
-    <Style x:Key="OverlayStyle" 
-           TargetType="Rectangle">
-      <Setter Property="Stroke" 
-              Value="#2d2d2d" />
-      <Setter Property="Fill" Value="#2d2d2d" />
-      <Setter Property="Opacity"
-              Value="0.9" />
-    </Style>
-  </telerik:RadWindow.Resources>
   <telerik:RadWindow.Icon>
     <Image Source="../Data/SNI" Width="24" Margin="5" />
   </telerik:RadWindow.Icon>
@@ -42,13 +32,18 @@
                Foreground="Gray"
                TextWrapping="Wrap" />
 
-    <telerik:RadButton Name="edit"
-                       Grid.Row="2"
-                       Content="Edit"
-                       Width="110"
-                       Margin="2, 6"
-                       Visibility="Collapsed"
-                       HorizontalAlignment="Right"
-                       Click="Edit_Click" />
+    <StackPanel Grid.Row="2"
+                Margin="0, 0, 2, 10"
+                Orientation="Horizontal"
+                HorizontalAlignment="Right">
+      <telerik:RadButton x:Name="edit"
+                         Content="Edit"
+                         Width="110"
+                         Click="Edit_Click" />
+      <telerik:RadButton x:Name="close"
+                         Content="Close"
+                         Width="110"
+                         Click="Close_Click" />
+    </StackPanel>
   </Grid>
 </telerik:RadWindow>
