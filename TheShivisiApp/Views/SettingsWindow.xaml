@@ -123,20 +123,19 @@
 
       <telerik:RadWrapPanel Grid.Row="7"
                             Grid.ColumnSpan="2"
-														Margin="0, 5, -10, 0"
+														Margin="0, 5, 0, 0"
 														VerticalAlignment="Center"
 														HorizontalAlignment="Right">
+        <Button Padding="3"
+								MinWidth="70"
+								Content="Cancel"
+								Click="Cancel_Click"
+								telerik:StyleManager.Theme="Windows11" />
         <Button Padding="3"
 								MinWidth="70"
 								Content="OK"
 								Click="Save_Click"
 								IsDefault="True"
-								telerik:StyleManager.Theme="Windows11" />
-        <Button Padding="3"
-								Margin="10, 0"
-								MinWidth="70"
-								Content="Cancel"
-								Click="Cancel_Click"
 								telerik:StyleManager.Theme="Windows11" />
       </telerik:RadWrapPanel>
 
