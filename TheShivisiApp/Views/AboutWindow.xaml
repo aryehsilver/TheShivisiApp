@@ -76,7 +76,7 @@
                      HorizontalAlignment="Center">
             <Run Text="©" />
             <Run Name="date" />
-            <Run Text="A project by" />
+            <Run Text="A project of" />
             <Hyperlink telerik:StyleManager.Theme="Windows11"
                        Click="Creator_Click">All Dev</Hyperlink>
           </TextBlock>

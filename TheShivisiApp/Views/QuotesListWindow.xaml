@@ -12,16 +12,6 @@
 									 WindowStartupLocation="CenterScreen"
 									 telerikNavigation:RadWindowInteropHelper.ShowInTaskbar="True"
 									 telerik:StyleManager.Theme="Windows11">
-  <telerik:RadWindow.Resources>
-    <Style x:Key="OverlayStyle" 
-           TargetType="Rectangle">
-      <Setter Property="Stroke" 
-              Value="#2d2d2d" />
-      <Setter Property="Fill" Value="#2d2d2d" />
-      <Setter Property="Opacity"
-              Value="0.9" />
-    </Style>
-  </telerik:RadWindow.Resources>
   <telerik:RadWindow.Icon>
     <Image Source="../Data/SNI" Width="24" Margin="5" />
   </telerik:RadWindow.Icon>

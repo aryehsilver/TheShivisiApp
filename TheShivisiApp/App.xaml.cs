@@ -59,7 +59,9 @@ public partial class App : Application {
     }
 
     UpdateHelper.CleanUpInstallationFiles();
-    _ = UpdateHelper.CheckForUpdates();
+    if (new AppDbContext().Settings.SingleOrDefault().CheckUpdatesOnStartup) {
+      _ = UpdateHelper.CheckForUpdates();
+    }
   }
 
   private void ShowSplashScreen() {

@@ -26,7 +26,7 @@ public partial class AboutWindow : RadWindow {
   private async void CheckForUpdates_Click(object sender, RoutedEventArgs e) {
     busyLoader.IsBusy = true;
     update.Content = "";
-    (bool updateAvailable, _version) = await UpdateHelper.CheckForUpdates();
+    (bool updateAvailable, _version) = await UpdateHelper.CheckForUpdates(true);
     if (updateAvailable) {
       doUpdate.Content = $"Update to {_version}";
       doUpdate.Visibility = Visibility.Visible;

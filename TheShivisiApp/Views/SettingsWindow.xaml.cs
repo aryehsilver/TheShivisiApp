@@ -16,6 +16,7 @@ public partial class SettingsWindow : RadWindow {
     lastUpdated.Text = $"Last updated: {Settings.LastUpdated:dddd dd MMMM yyyy hh:mm tt}";
     startup.IsChecked = Settings.RunOnStartUp;
     splashScreen.IsChecked = Settings.ShowSplashScreen;
+    updates.IsChecked = Settings.CheckUpdatesOnStartup;
     interval.Value = Settings.Interval;
     notifText.CurrentText = Settings.NotifText;
     notifText.WatermarkContent = "Remember!" + Environment.NewLine + "You're not the one in charge here!";
@@ -30,6 +31,7 @@ public partial class SettingsWindow : RadWindow {
     try {
       Settings.RunOnStartUp = startup.IsChecked ?? true;
       Settings.ShowSplashScreen = splashScreen.IsChecked ?? true;
+      Settings.CheckUpdatesOnStartup = updates.IsChecked ?? true;
       Settings.Interval = (int)interval.Value;
       Settings.NotifText = notifText.CurrentText;
       Settings.UseRandomQuote = random.IsChecked ?? true;

@@ -37,6 +37,9 @@
 		<Page Include="Views\AboutWindow.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</Page>
+		<Page Include="Views\BearerTokenWindow.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</Page>
 		<Page Include="Views\EditQuoteWindow.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</Page>
@@ -60,6 +63,7 @@
 		<Compile Include="Helpers\VersionHelper.cs" />
 		<Compile Include="ViewModels\NotifyIconViewModel.cs" />
 		<Compile Include="Views\AboutWindow.xaml.cs" />
+		<Compile Include="Views\BearerTokenWindow.xaml.cs" />
 		<Compile Include="Views\EditQuoteWindow.xaml.cs" />
 		<Compile Include="Views\QuotesListWindow.xaml.cs" />
 		<Compile Include="Views\QuoteWindow.xaml.cs" />

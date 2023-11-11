@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
@@ -8,21 +9,52 @@ namespace TheShivisiApp.Helpers;
 public static class UpdateHelper {
   private static string _filePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\The Shivisi App";
 
-  public static async Task<(bool, string)> CheckForUpdates() {
+  public static async Task<(bool, string)> CheckForUpdates(bool isAboutWindow = false) {
     string Url = "https://api.github.com/repos/aryehsilver/TheShivisiApp/releases";
-    try {
-      using HttpClient client = CreateClient();
-      List<Release> release = JsonConvert.DeserializeObject<List<Release>>(await client.GetStringAsync(Url));
-      string version = VersionHelper.GetRunningVersion().ToString();
-      if (release.FirstOrDefault().TagName.Replace("v", "") != version.Remove(5)) {
-        PopTheToast.NewVersionAvailableToast(release.FirstOrDefault().TagName.Replace("v", ""));
-        return (true, release.FirstOrDefault().TagName.Replace("v", ""));
+    string bearerToken = await GetBearerToken();
+    if (!string.IsNullOrWhiteSpace(bearerToken)) {
+      HttpResponseMessage response = new();
+      try {
+        using HttpClient client = CreateClient(bearerToken);
+        response = await client.GetAsync(Url);
+        if (response.StatusCode is HttpStatusCode.Unauthorized or HttpStatusCode.Forbidden) {
+          using AppDbContext context = new();
+          if (new BearerTokenWindow().ShowDialog() ?? false) {
+            bearerToken = (await context.Settings.SingleOrDefaultAsync()).BearerToken;
+            using HttpClient newClient = CreateClient(bearerToken);
+            response = await newClient.GetAsync(Url);
+          }
+        }
+        List<Release> release = JsonConvert.DeserializeObject<List<Release>>(await response.Content.ReadAsStringAsync());
+        string version = VersionHelper.GetRunningVersion().ToString();
+        if (release.FirstOrDefault().TagName.Replace("v", "") != version.Remove(5)) {
+          PopTheToast.NewVersionAvailableToast(release.FirstOrDefault().TagName.Replace("v", ""));
+          return (true, release.FirstOrDefault().TagName.Replace("v", ""));
+        }
+      } catch (Exception ex) {
+        Debug.WriteLine("Check for update error: " + ex.Message);
+        if (!isAboutWindow && ex.InnerException?.Message != "No such host is known.") {
+          RadWindow.Alert(new DialogParameters {
+            Header = "Error",
+            Content = $"An error occurred whilst checking for updates.{Environment.NewLine}Please email tsa@alldev.co.uk"
+          });
+        }
       }
-    } catch (Exception ex) {
-      Debug.WriteLine("Check for update error: " + ex.Message);
     }
 
     return (false, "");
+  }
+
+  private static async Task<string> GetBearerToken() {
+    using AppDbContext context = new();
+    string bearerToken = (await context.Settings.SingleOrDefaultAsync()).BearerToken;
+    if (string.IsNullOrWhiteSpace(bearerToken)) {
+      if (new BearerTokenWindow().ShowDialog() ?? false) {
+        bearerToken = (await context.Settings.SingleOrDefaultAsync()).BearerToken;
+      }
+    }
+
+    return bearerToken;
   }
 
   public static async Task DownloadUpdate(string version) {
@@ -41,15 +73,16 @@ public static class UpdateHelper {
   }
 
   private static async Task DownloadTheFile(string filePath, string url) {
-    using HttpClient client = CreateClient();
+    using AppDbContext context = new();
+    using HttpClient client = CreateClient((await context.Settings.SingleOrDefaultAsync()).BearerToken);
     using Stream downloadStream = await client.GetStreamAsync(url);
     using FileStream fileStream = File.Create(filePath);
     await downloadStream.CopyToAsync(fileStream);
   }
 
-  private static HttpClient CreateClient() {
+  private static HttpClient CreateClient(string bearerToken) {
     HttpClient client = new();
-    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "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");
+    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
     client.DefaultRequestHeaders.Add("User-Agent", "TSA");
     return client;
   }

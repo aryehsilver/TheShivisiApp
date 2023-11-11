@@ -5,7 +5,7 @@
 									 xmlns:telerikNavigation="clr-namespace:Telerik.Windows.Controls.Navigation;assembly=Telerik.Windows.Controls.Navigation"
 									 xmlns:gh="clr-namespace:TheShivisiApp.Helpers"
                    Header="The Shivisi App Settings"
-									 Height="450"
+									 Height="500"
 									 Width="450"
 									 ResizeMode="CanMinimize"
 									 Style="{StaticResource WindowStyle}"
@@ -30,7 +30,7 @@
                             Foreground="#fff"
 														OverlayStyle="{StaticResource OverlayStyle}">
     <Grid gh:GridHelper.GridCols="auto, *"
-					gh:GridHelper.GridRows="auto, auto, auto, auto, *, auto, auto, auto, auto"
+					gh:GridHelper.GridRows="auto, auto, auto, auto, auto, *, auto, auto, auto, auto"
 					Margin="20, 10, 20, 20">
 
       <telerik:RadWrapPanel Grid.Row="0"
@@ -49,15 +49,23 @@
                    VerticalAlignment="Center" />
       </telerik:RadWrapPanel>
 
-      <TextBlock Grid.Column="0"
-								 Grid.Row="2"
+      <telerik:RadWrapPanel Grid.Row="2"
+														Grid.Column="0">
+        <telerik:RadToggleSwitchButton Name="updates" />
+        <TextBlock Text="Check for updates on startup"
+                   Margin="5, 0"
+                   VerticalAlignment="Center" />
+      </telerik:RadWrapPanel>
+
+      <TextBlock Grid.Row="3"
+								 Grid.Column="0"
 								 Margin="5, 0, 0, 15"
 								 Foreground="White"
 								 VerticalAlignment="Center"
 								 Text="Popup Intervals (mins): " />
-      <telerik:RadNumericUpDown Name="interval"
+      <telerik:RadNumericUpDown Grid.Row="3"
 																Grid.Column="1"
-																Grid.Row="2"
+																Name="interval"
 																Margin="0, 0, 0, 15"
 																Padding="5"
 																Width="122"
@@ -66,14 +74,14 @@
 																HorizontalAlignment="Right"
                                 HorizontalContentAlignment="Left" />
 
-      <TextBlock Grid.Column="0"
-								 Grid.Row="3"
+      <TextBlock Grid.Row="4"
+                 Grid.Column="0"
 								 Foreground="White"
 								 Margin="5, 0, 0, 10"
 								 Text="Text to display on popup: " />
-      <telerik:RadWatermarkTextBox Grid.Column="0"
-																	 Grid.ColumnSpan="2"
-																	 Grid.Row="4"
+      <telerik:RadWatermarkTextBox Grid.Row="5"
+                                   Grid.Column="0"
+																	 Grid.ColumnSpan="2"																	 
 																	 Padding="5"
 																	 Name="notifText"
 																	 TextWrapping="WrapWithOverflow"
@@ -83,19 +91,19 @@
 																	 SpellCheck.IsEnabled="True"
 																	 VerticalContentAlignment="Top" />
 
-      <telerik:RadWrapPanel Grid.Row="5"
+      <telerik:RadWrapPanel Grid.Row="6"
 														Grid.Column="0"
 														Margin="0, 5, 0, 20">
         <telerik:RadToggleSwitchButton Name="random"
                                        Click="RandomQuotes_Click" />
-        <TextBlock Text="Use random quotes"
+        <TextBlock Text="Select random from list"
                    Margin="5, 0"
                    VerticalAlignment="Center" />
       </telerik:RadWrapPanel>
 
-      <telerik:RadButton Grid.Row="5"
+      <telerik:RadButton Grid.Row="6"
                          Grid.Column="1"
-												 Content="View quotes"
+												 Content="View list"
 												 telerik:StyleManager.Theme="Windows11"
 												 Padding="15, 0"
 												 Margin="0, 5, 0, 20"
@@ -103,7 +111,7 @@
 												 VerticalAlignment="Center"
 												 Click="ViewQuotes_Click" />
 
-      <telerik:RadButton Grid.Row="6"
+      <telerik:RadButton Grid.Row="7"
 												 Content="Test"
 												 telerik:StyleManager.Theme="Windows11"
 												 Padding="3"
@@ -113,8 +121,8 @@
 												 Width="70"
 												 Click="Test_Click" />
 
-      <telerik:RadWrapPanel Grid.ColumnSpan="2"
-														Grid.Row="6"
+      <telerik:RadWrapPanel Grid.Row="7"
+                            Grid.ColumnSpan="2"
 														Margin="0, 5, -10, 0"
 														VerticalAlignment="Center"
 														HorizontalAlignment="Right">
@@ -132,8 +140,8 @@
 								telerik:StyleManager.Theme="Windows11" />
       </telerik:RadWrapPanel>
 
-      <TextBlock Grid.ColumnSpan="2"
-								 Grid.Row="7"
+      <TextBlock Grid.Row="8"
+                 Grid.ColumnSpan="2"								 
 								 Foreground="White"
 								 Margin="5, 10, 0, 0">
 				<Hyperlink telerik:StyleManager.Theme="Windows11"
@@ -142,8 +150,8 @@
                FontSize="12" />
         </Hyperlink>
       </TextBlock>
-      <TextBlock Grid.ColumnSpan="2"
-								 Grid.Row="7"
+      <TextBlock Grid.Row="8"
+                 Grid.ColumnSpan="2"
                  Text="Last updated: Wednesday 15 September 2023 08:85 PM"
                  HorizontalAlignment="Right"
                  VerticalAlignment="Center"
